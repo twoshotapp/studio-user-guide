@@ -27,31 +27,27 @@ Welcome to the TwoShot Studio! This comprehensive guide covers all keyboard shor
 
 ### Essential Shortcuts Cheat Sheet
 
-| Action | Shortcut |
-|--------|----------|
-| Play/Pause | `Space` |
-| Undo | `Ctrl+Z` / `Cmd+Z` |
-| Redo | `Ctrl+Shift+Z` / `Cmd+Shift+Z` |
-| Save | `Ctrl+S` / `Cmd+S` |
-| Delete Selection | `Delete` or `Backspace` |
-| Duplicate | `Ctrl+D` / `Cmd+D` |
-| Copy | `Ctrl+C` / `Cmd+C` |
-| Paste | `Ctrl+V` / `Cmd+V` |
-| Select All | `Ctrl+A` / `Cmd+A` |
-| Zoom to Fit | `Z` (no selection) or `Ctrl+0` / `Cmd+0` |
-| Zoom to Selection | `Z` (with selection) |
+- `Space` — Play/Pause
+- `Ctrl+Z` / `Cmd+Z` — Undo
+- `Ctrl+Shift+Z` / `Cmd+Shift+Z` — Redo
+- `Ctrl+S` / `Cmd+S` — Save
+- `Delete` or `Backspace` — Delete Selection
+- `Ctrl+D` / `Cmd+D` — Duplicate
+- `Ctrl+C` / `Cmd+C` — Copy
+- `Ctrl+V` / `Cmd+V` — Paste
+- `Ctrl+A` / `Cmd+A` — Select All
+- `Z` — Zoom to Fit (no selection) or Zoom to Selection
+- `Ctrl+0` / `Cmd+0` — Zoom to Fit
 
 ### Mouse Mode Quick Keys
 
-| Mode | Key | Description |
-|------|-----|-------------|
-| Select | `S` | Select and move clips |
-| Stretch | `T` | Resize clip edges |
-| Split | `X` | Cut clips at cursor |
-| Clone | `C` | Duplicate while dragging |
-| Volume | `V` | Adjust clip volume |
-| Delete | `D` | Click to delete |
-| Paint | `P` | Draw MIDI notes (MIDI editor only) |
+- `S` — **Select**: Select and move clips
+- `T` — **Stretch**: Resize clip edges
+- `X` — **Split**: Cut clips at cursor
+- `C` — **Clone**: Duplicate while dragging
+- `V` — **Volume**: Adjust clip volume
+- `D` — **Delete**: Click to delete
+- `P` — **Paint**: Draw MIDI notes (MIDI editor only)
 
 ---
 
@@ -151,39 +147,39 @@ The Studio has 7 mouse modes that change how your cursor interacts with clips. S
 The default mode for general editing.
 
 **Capabilities:**
-- **Click clip** - Select it (replaces current selection)
-- **Ctrl/Cmd + Click** - Add/remove from selection (toggle)
-- **Shift + Click** - Range select from last selected clip
-- **Drag clip** - Move horizontally (time) and vertically (track)
-- **Drag near edge** - Resize clip (within 10px of edge)
-- **Click empty area** - Deselect all
+- **Click clip** — Select it (replaces current selection)
+- **Ctrl/Cmd + Click** — Add/remove from selection (toggle)
+- **Shift + Click** — Range select from last selected clip
+- **Drag clip** — Move horizontally (time) and vertically (track)
+- **Drag near edge** — Resize clip (within 10px of edge)
+- **Click empty area** — Deselect all
 
 ### Stretch Mode (`T`)
 
 Dedicated mode for resizing clips.
 
 **Capabilities:**
-- **Drag left edge** - Trim clip start (adjusts where playback begins)
-- **Drag right edge** - Trim clip end (adjusts where playback ends)
-- **Alt + Drag** - Bypass snap-to-grid for precise positioning
+- **Drag left edge** — Trim clip start (adjusts where playback begins)
+- **Drag right edge** — Trim clip end (adjusts where playback ends)
+- **Alt + Drag** — Bypass snap-to-grid for precise positioning
 
 ### Split Mode (`X`)
 
 Cut clips at any point.
 
 **Capabilities:**
-- **Click on clip** - Split at cursor position
-- **Red dashed line** - Shows where split will occur
-- **With selection** - Only splits selected clips
-- **Without selection** - Splits all clips at that position
-- **Right-click** - Move playhead to clicked position (instead of splitting)
+- **Click on clip** — Split at cursor position
+- **Red dashed line** — Shows where split will occur
+- **With selection** — Only splits selected clips
+- **Without selection** — Splits all clips at that position
+- **Right-click** — Move playhead to clicked position (instead of splitting)
 
 ### Clone Mode (`C`)
 
 Create copies while dragging.
 
 **Capabilities:**
-- **Ctrl/Cmd + Drag** - Create a copy and drag it to new position
+- **Ctrl/Cmd + Drag** — Create a copy and drag it to new position
 - Original clip stays in place
 - Works in both timeline and MIDI editor
 
@@ -192,28 +188,28 @@ Create copies while dragging.
 Adjust clip volume or MIDI velocity.
 
 **Capabilities:**
-- **Drag up** - Increase volume/velocity
-- **Drag down** - Decrease volume/velocity
-- **Right-click** (MIDI only) - Reset velocity to 1.0
+- **Drag up** — Increase volume/velocity
+- **Drag down** — Decrease volume/velocity
+- **Right-click** (MIDI only) — Reset velocity to 1.0
 
 ### Delete Mode (`D`)
 
 Quick deletion without selecting first.
 
 **Capabilities:**
-- **Click** - Delete clip/note
-- **Drag** - Delete all clips/notes under cursor path
-- **Right-click** - Also deletes (same as left-click)
+- **Click** — Delete clip/note
+- **Drag** — Delete all clips/notes under cursor path
+- **Right-click** — Also deletes (same as left-click)
 
 ### Paint Mode (`P`) - MIDI Editor Only
 
 Draw new MIDI notes.
 
 **Capabilities:**
-- **Click** - Create note at cursor position
-- **Click + Drag** - Draw note with custom duration
-- **Y position** - Determines note pitch
-- **Snap-to-grid** - Applied automatically
+- **Click** — Create note at cursor position
+- **Click + Drag** — Draw note with custom duration
+- **Y position** — Determines note pitch
+- **Snap-to-grid** — Applied automatically
 
 ---
 
@@ -221,100 +217,80 @@ Draw new MIDI notes.
 
 ### Playback
 
-| Action | Shortcut |
-|--------|----------|
-| Play/Pause | `Space` |
-| Play from start | `Ctrl+Space` / `Cmd+Space` |
+- `Space` — Play/Pause
+- `Ctrl+Space` / `Cmd+Space` — Play from start
 
 ### File Operations
 
-| Action | Shortcut |
-|--------|----------|
-| Save project | `Ctrl+S` / `Cmd+S` |
-| Undo | `Ctrl+Z` / `Cmd+Z` |
-| Redo | `Ctrl+Y` / `Ctrl+Shift+Z` / `Cmd+Shift+Z` |
+- `Ctrl+S` / `Cmd+S` — Save project
+- `Ctrl+Z` / `Cmd+Z` — Undo
+- `Ctrl+Y` / `Ctrl+Shift+Z` / `Cmd+Shift+Z` — Redo
 
 ### Selection
 
-| Action | Shortcut |
-|--------|----------|
-| Select all clips | `Ctrl+A` / `Cmd+A` |
-| Select all in selected tracks | `Ctrl+Shift+A` / `Cmd+Shift+A` |
-| Invert selection | `Ctrl+I` / `Cmd+I` |
-| Clear selection | `Escape` |
-| Select next clip/note | `Tab` |
-| Select previous clip/note | `Shift+Tab` |
+- `Ctrl+A` / `Cmd+A` — Select all clips
+- `Ctrl+Shift+A` / `Cmd+Shift+A` — Select all in selected tracks
+- `Ctrl+I` / `Cmd+I` — Invert selection
+- `Escape` — Clear selection
+- `Tab` — Select next clip/note
+- `Shift+Tab` — Select previous clip/note
 
 ### Clip Operations
 
-| Action | Shortcut |
-|--------|----------|
-| Delete selected | `Delete` or `Backspace` |
-| Duplicate | `Ctrl+D` / `Cmd+D` |
-| Copy | `Ctrl+C` / `Cmd+C` |
-| Paste | `Ctrl+V` / `Cmd+V` |
-| Group clips | `Ctrl+G` / `Cmd+G` |
-| Ungroup clips | `Ctrl+Shift+G` / `Cmd+Shift+G` |
-| Burn to audio | `Ctrl+B` / `Cmd+B` |
-| Auto-extend to next clip | `Ctrl+L` / `Cmd+L` |
-| Quantize to grid | `Q` |
-| Quantize with end | `Ctrl+Q` / `Cmd+Q` |
+- `Delete` or `Backspace` — Delete selected
+- `Ctrl+D` / `Cmd+D` — Duplicate
+- `Ctrl+C` / `Cmd+C` — Copy
+- `Ctrl+V` / `Cmd+V` — Paste
+- `Ctrl+G` / `Cmd+G` — Group clips
+- `Ctrl+Shift+G` / `Cmd+Shift+G` — Ungroup clips
+- `Ctrl+B` / `Cmd+B` — Burn to audio
+- `Ctrl+L` / `Cmd+L` — Auto-extend to next clip
+- `Q` — Quantize to grid
+- `Ctrl+Q` / `Cmd+Q` — Quantize with end
 
 ### Zoom Controls
 
-| Action | Shortcut |
-|--------|----------|
-| Zoom in | `Ctrl++` / `Cmd++` |
-| Zoom out | `Ctrl+-` / `Cmd+-` |
-| Zoom to all | `Ctrl+0` / `Cmd+0` |
-| Zoom to selection (or all) | `Z` |
-| Zoom at cursor | `Ctrl+Scroll` / `Cmd+Scroll` |
-| Change grid resolution | `Alt+Scroll` |
+- `Ctrl++` / `Cmd++` — Zoom in
+- `Ctrl+-` / `Cmd+-` — Zoom out
+- `Ctrl+0` / `Cmd+0` — Zoom to all
+- `Z` — Zoom to selection (or all)
+- `Ctrl+Scroll` / `Cmd+Scroll` — Zoom at cursor
+- `Alt+Scroll` — Change grid resolution
 
 ### Movement
 
-| Action | Shortcut |
-|--------|----------|
-| Move left by grid | `Left Arrow` |
-| Move right by grid | `Right Arrow` |
-| Move left quickly (10x) | `Ctrl+Left` / `Cmd+Left` |
-| Move right quickly (10x) | `Ctrl+Right` / `Cmd+Right` |
-| Move to next track | `Up Arrow` / `Down Arrow` |
+- `Left Arrow` — Move left by grid
+- `Right Arrow` — Move right by grid
+- `Ctrl+Left` / `Cmd+Left` — Move left quickly (10x)
+- `Ctrl+Right` / `Cmd+Right` — Move right quickly (10x)
+- `Up Arrow` / `Down Arrow` — Move to next track
 
 ### Track Operations
 
-| Action | Shortcut |
-|--------|----------|
-| Delete selected tracks | `Shift+Delete` |
-| Duplicate selected tracks | `Shift+D` |
-| Insert new track | `Shift++` (Shift + Plus) |
-| Move tracks up | `Shift+Up Arrow` |
-| Move tracks down | `Shift+Down Arrow` |
+- `Shift+Delete` — Delete selected tracks
+- `Shift+D` — Duplicate selected tracks
+- `Shift++` (Shift + Plus) — Insert new track
+- `Shift+Up Arrow` — Move tracks up
+- `Shift+Down Arrow` — Move tracks down
 
 ### Audio Controls
 
-| Action | Shortcut |
-|--------|----------|
-| Mute/unmute clips | `M` (with selection) |
-| Toggle metronome | `M` (without selection) |
-| Mute/unmute tracks | `Shift+M` |
-| Solo clip | `S` (with exactly 1 clip selected) |
+- `M` (with selection) — Mute/unmute clips
+- `M` (without selection) — Toggle metronome
+- `Shift+M` — Mute/unmute tracks
+- `S` (with exactly 1 clip selected) — Solo clip
 
 ### Editor Navigation
 
-| Action | Shortcut |
-|--------|----------|
-| Open clip editor | `Enter` (with MIDI or Group clip selected) |
-| Open clip editor | `Double-click` on clip |
+- `Enter` (with MIDI or Group clip selected) — Open clip editor
+- `Double-click` on clip — Open clip editor
 
 ### MIDI-Specific Shortcuts
 
-| Action | Shortcut |
-|--------|----------|
-| Pitch up 1 semitone | `Up Arrow` |
-| Pitch down 1 semitone | `Down Arrow` |
-| Pitch up 1 octave | `Ctrl+Up` / `Cmd+Up` |
-| Pitch down 1 octave | `Ctrl+Down` / `Cmd+Down` |
+- `Up Arrow` — Pitch up 1 semitone
+- `Down Arrow` — Pitch down 1 semitone
+- `Ctrl+Up` / `Cmd+Up` — Pitch up 1 octave
+- `Ctrl+Down` / `Cmd+Down` — Pitch down 1 octave
 
 ---
 
@@ -322,48 +298,38 @@ Draw new MIDI notes.
 
 ### Click Behaviors
 
-| Action | Result |
-|--------|--------|
-| Click empty area | Deselect all |
-| Click clip | Select clip (replaces selection) |
-| Ctrl/Cmd + Click | Toggle clip in selection |
-| Shift + Click | Range select to clicked clip |
-| Double-click clip | Open clip editor |
-| Right-click clip | Show context menu |
+- **Click empty area** — Deselect all
+- **Click clip** — Select clip (replaces selection)
+- **Ctrl/Cmd + Click** — Toggle clip in selection
+- **Shift + Click** — Range select to clicked clip
+- **Double-click clip** — Open clip editor
+- **Right-click clip** — Show context menu
 
 ### Drag Operations
 
-| Action | Result |
-|--------|--------|
-| Drag clip | Move in time and/or to different track |
-| Ctrl/Cmd + Drag | Clone drag (create copy while moving) |
-| Drag clip edge | Trim start or end |
-| Drag track header | Reorder tracks |
+- **Drag clip** — Move in time and/or to different track
+- **Ctrl/Cmd + Drag** — Clone drag (create copy while moving)
+- **Drag clip edge** — Trim start or end
+- **Drag track header** — Reorder tracks
 
 ### Selection Box
 
-| Action | Result |
-|--------|--------|
-| Ctrl + Drag on empty | Create selection box |
-| Ctrl + Shift + Drag | Toggle selection mode |
-| Escape during drag | Cancel selection box |
+- **Ctrl + Drag on empty** — Create selection box
+- **Ctrl + Shift + Drag** — Toggle selection mode
+- **Escape during drag** — Cancel selection box
 
 ### Zoom Box
 
-| Action | Result |
-|--------|--------|
-| Ctrl + Right-click + Drag | Create zoom region |
-| Release | Zoom to that region |
-| Ctrl + Right-click (no drag) | Reset zoom to all |
+- **Ctrl + Right-click + Drag** — Create zoom region
+- **Release** — Zoom to that region
+- **Ctrl + Right-click (no drag)** — Reset zoom to all
 
 ### Scroll Wheel
 
-| Action | Result |
-|--------|--------|
-| Scroll | Pan timeline horizontally |
-| Ctrl/Cmd + Scroll | Zoom at cursor position |
-| Alt + Scroll | Change grid resolution |
-| Scroll on grid pill | Change grid resolution |
+- **Scroll** — Pan timeline horizontally
+- **Ctrl/Cmd + Scroll** — Zoom at cursor position
+- **Alt + Scroll** — Change grid resolution
+- **Scroll on grid pill** — Change grid resolution
 
 ---
 
@@ -376,62 +342,62 @@ Right-click on clips or tracks to access context menus with additional options.
 Right-click on any clip to see options:
 
 **For Audio Clips:**
-- **Transform** - Apply AI transformations (stem separation, style transfer, etc.)
-- **Replace Source** - Swap the audio file with a different one
-- **Download** - Export the clip as an audio file
-- **Duplicate** (`Ctrl+D`) - Create a copy
-- **Split** - Divide the clip at a specific point
-- **Delete** - Remove the clip
+- **Transform** — Apply AI transformations (stem separation, style transfer, etc.)
+- **Replace Source** — Swap the audio file with a different one
+- **Download** — Export the clip as an audio file
+- **Duplicate** (`Ctrl+D`) — Create a copy
+- **Split** — Divide the clip at a specific point
+- **Delete** — Remove the clip
 
 **For MIDI Clips:**
-- **Open Editor** - Open the piano roll editor
-- **Quantize** - Snap notes to grid
-- **Duplicate** (`Ctrl+D`) - Create a copy
-- **Delete** - Remove the clip
+- **Open Editor** — Open the piano roll editor
+- **Quantize** — Snap notes to grid
+- **Duplicate** (`Ctrl+D`) — Create a copy
+- **Delete** — Remove the clip
 
 **For Group Clips:**
-- **Open Editor** - Edit the nested timeline
-- **Ungroup** (`Ctrl+Shift+G`) - Extract contents to parent timeline
-- **Duplicate** (`Ctrl+D`) - Create a copy
-- **Delete** - Remove the clip
+- **Open Editor** — Edit the nested timeline
+- **Ungroup** (`Ctrl+Shift+G`) — Extract contents to parent timeline
+- **Duplicate** (`Ctrl+D`) — Create a copy
+- **Delete** — Remove the clip
 
 ### Track Context Menu
 
 Right-click on a track header to see options:
 
 **Edit Options:**
-- **Select All** - Select all clips in this track
-- **Transform** - Apply AI transformations to entire track (burns first)
-- **Rename Track** - Change the track name
-- **Duplicate Track** (`Shift+D`) - Create a copy of the track
-- **Order** - Move track up/down, insert tracks above/below
-- **Delete Track** (`Shift+Del`) - Remove the track and its clips
+- **Select All** — Select all clips in this track
+- **Transform** — Apply AI transformations to entire track (burns first)
+- **Rename Track** — Change the track name
+- **Duplicate Track** (`Shift+D`) — Create a copy of the track
+- **Order** — Move track up/down, insert tracks above/below
+- **Delete Track** (`Shift+Del`) — Remove the track and its clips
 
 **Render Options:**
-- **Burn Track** - Convert all clips to a single rendered audio clip
-- **Download Audio** - Export the track as a WAV file (Pro feature)
-- **Share as Sample** - Publish the track as a sample on TwoShot
+- **Burn Track** — Convert all clips to a single rendered audio clip
+- **Download Audio** — Export the track as a WAV file (Pro feature)
+- **Share as Sample** — Publish the track as a sample on TwoShot
 
 **Looping Options** (when looping is enabled):
-- **Disable Looping** - Turn off track looping
-- **Change Loop Interval** - Set the loop length in beats
-- **Burn Ghost Clips** - Convert ghost clips to real clips
+- **Disable Looping** — Turn off track looping
+- **Change Loop Interval** — Set the loop length in beats
+- **Burn Ghost Clips** — Convert ghost clips to real clips
 
 ### Project Menu
 
 Click the project title dropdown to access:
 
 **Getting Started:**
-- **New Empty Session** - Start a fresh project
-- **Load Demo Session** - Load an example project
-- **User Manual** - Open this guide
+- **New Empty Session** — Start a fresh project
+- **Load Demo Session** — Load an example project
+- **User Manual** — Open this guide
 
 **Project Options:**
-- **Rename Session** - Change the project name
-- **Make a Copy** - Duplicate the entire project
-- **Open Session** - Browse recent projects
-- **Delete Session** - Permanently remove the project
-- **Close Session** - Exit without deleting
+- **Rename Session** — Change the project name
+- **Make a Copy** — Duplicate the entire project
+- **Open Session** — Browse recent projects
+- **Delete Session** — Permanently remove the project
+- **Close Session** — Exit without deleting
 
 ---
 
@@ -441,14 +407,14 @@ Click the project title dropdown to access:
 
 The timeline header contains these controls (left to right):
 
-1. **Play/Pause Button** - Start or stop playback
-2. **Project Title** - Click to rename, dropdown for project options
-3. **Undo/Redo** - History navigation
-4. **Mouse Mode Dropdown** - Switch between modes
-5. **Tempo Control** - Adjust project BPM
-6. **Metronome Toggle** - Enable/disable click track
-7. **Grid Controls** - Magnet (snap) + grid size dropdown
-8. **Zoom Controls** - Zoom in/out/fit buttons
+1. **Play/Pause Button** — Start or stop playback
+2. **Project Title** — Click to rename, dropdown for project options
+3. **Undo/Redo** — History navigation
+4. **Mouse Mode Dropdown** — Switch between modes
+5. **Tempo Control** — Adjust project BPM
+6. **Metronome Toggle** — Enable/disable click track
+7. **Grid Controls** — Magnet (snap) + grid size dropdown
+8. **Zoom Controls** — Zoom in/out/fit buttons
 
 ### Playhead
 
@@ -471,22 +437,20 @@ Access the MIDI editor by double-clicking a MIDI clip or pressing `Enter` with o
 
 ### Piano Roll
 
-- **Vertical axis** - Pitch (notes)
-- **Horizontal axis** - Time (beats)
-- **Click piano keys** - Audition notes
-- **Shift + Click row** - Select all notes at that pitch
+- **Vertical axis** — Pitch (notes)
+- **Horizontal axis** — Time (beats)
+- **Click piano keys** — Audition notes
+- **Shift + Click row** — Select all notes at that pitch
 
 ### Note Editing
 
-| Action | Method |
-|--------|--------|
-| Add note | Paint mode (`P`) + click/drag |
-| Select note | Click in Select mode |
-| Move note | Drag horizontally/vertically |
-| Resize note | Stretch mode (`T`) + drag edges |
-| Delete note | Delete mode (`D`) + click, or select + `Delete` |
-| Change pitch | Drag up/down, or use `Up`/`Down` arrows |
-| Change velocity | Volume mode (`V`) + drag up/down |
+- **Add note** — Paint mode (`P`) + click/drag
+- **Select note** — Click in Select mode
+- **Move note** — Drag horizontally/vertically
+- **Resize note** — Stretch mode (`T`) + drag edges
+- **Delete note** — Delete mode (`D`) + click, or select + `Delete`
+- **Change pitch** — Drag up/down, or use `Up`/`Down` arrows
+- **Change velocity** — Volume mode (`V`) + drag up/down
 
 ### Velocity Editing
 
@@ -502,9 +466,9 @@ Access the MIDI editor by double-clicking a MIDI clip or pressing `Enter` with o
 
 The magnet icon in the header controls snap-to-grid behavior.
 
-- **Red magnet** - Snap enabled (clips align to grid lines)
-- **Gray magnet** - Snap disabled (free positioning)
-- **Hold Alt** - Temporarily override snap while dragging
+- **Red magnet** — Snap enabled (clips align to grid lines)
+- **Gray magnet** — Snap disabled (free positioning)
+- **Hold Alt** — Temporarily override snap while dragging
 
 When snap is enabled:
 - Clip movements snap to grid lines
@@ -514,8 +478,8 @@ When snap is enabled:
 ### Grid Lines
 
 Grid lines appear on the timeline to help with alignment:
-- **Major lines** - Show bar boundaries
-- **Minor lines** - Show beat subdivisions based on grid size
+- **Major lines** — Show bar boundaries
+- **Minor lines** — Show beat subdivisions based on grid size
 - **Grid size** affects both snap behavior and visual lines
 
 ### Grid Sizes
@@ -532,19 +496,17 @@ Available grid presets (click the grid pill to select):
 
 ### Changing Grid
 
-1. **Click grid pill** - Opens preset dropdown
-2. **Scroll on grid pill** - Cycle through sizes
-3. **Alt + Scroll anywhere** - Change grid size
+1. **Click grid pill** — Opens preset dropdown
+2. **Scroll on grid pill** — Cycle through sizes
+3. **Alt + Scroll anywhere** — Change grid size
 
 ### Zoom Controls
 
-| Method | Action |
-|--------|--------|
-| Zoom buttons | Zoom in/out from center |
-| `Ctrl/Cmd + Scroll` | Zoom at cursor position |
-| `Z` key | Zoom to selection (or fit all if nothing selected) |
-| `Ctrl+0` / `Cmd+0` | Zoom to fit all content |
-| Ctrl + Right-drag | Box zoom to region |
+- **Zoom buttons** — Zoom in/out from center
+- `Ctrl/Cmd + Scroll` — Zoom at cursor position
+- `Z` key — Zoom to selection (or fit all if nothing selected)
+- `Ctrl+0` / `Cmd+0` — Zoom to fit all content
+- **Ctrl + Right-drag** — Box zoom to region
 
 ---
 
@@ -552,8 +514,8 @@ Available grid presets (click the grid pill to select):
 
 ### Adding Tracks
 
-- **Shift + Plus** - Insert new track below selection
-- **Drag audio** onto empty area - Creates new track with clip
+- **Shift + Plus** — Insert new track below selection
+- **Drag audio** onto empty area — Creates new track with clip
 - **Right-click track** > Order > Insert Track Above/Below
 
 ### Reordering Tracks
@@ -566,11 +528,11 @@ Available grid presets (click the grid pill to select):
 ### Track Controls
 
 Each track has:
-- **Name** - Click to edit
-- **Mute button** - Silence track (audio still processes)
-- **Solo button** - Play only this track
-- **Volume slider** - Track level (0-100%)
-- **Pan control** - Left/right stereo positioning
+- **Name** — Click to edit
+- **Mute button** — Silence track (audio still processes)
+- **Solo button** — Play only this track
+- **Volume slider** — Track level (0-100%)
+- **Pan control** — Left/right stereo positioning
 
 ### Track Looping
 
@@ -583,7 +545,7 @@ Enable looping to repeat a track's content:
 
 ### Deleting Tracks
 
-- **Shift + Delete** - Delete selected tracks
+- **Shift + Delete** — Delete selected tracks
 - **Right-click** > Delete Track
 - Clips on deleted tracks are also removed
 
@@ -601,13 +563,11 @@ Enable looping to repeat a track's content:
 
 ### Editing Clips
 
-| Task | How To |
-|------|--------|
-| Move | Drag in Select mode |
-| Resize | Drag edges in Stretch mode |
-| Split | Click in Split mode |
-| Duplicate | `Ctrl+D` or Ctrl+Drag |
-| Delete | Select + `Delete` or Delete mode |
+- **Move** — Drag in Select mode
+- **Resize** — Drag edges in Stretch mode
+- **Split** — Click in Split mode
+- **Duplicate** — `Ctrl+D` or Ctrl+Drag
+- **Delete** — Select + `Delete` or Delete mode
 
 ### Grouping
 
@@ -684,9 +644,9 @@ TwoShot integrates AI models for audio transformation.
 
 1. Right-click an audio clip > Transform
 2. Select a transformation model:
-   - **Stem Separation** - Extract vocals, drums, bass, etc.
-   - **Style Transfer** - Apply different musical styles
-   - **Audio Enhancement** - Improve quality, remove noise
+   - **Stem Separation** — Extract vocals, drums, bass, etc.
+   - **Style Transfer** — Apply different musical styles
+   - **Audio Enhancement** — Improve quality, remove noise
    - **And more...**
 3. Wait for processing
 4. Result replaces or adds to your clip
@@ -701,12 +661,12 @@ TwoShot integrates AI models for audio transformation.
 ### Available Transformations
 
 Common AI transformations include:
-- **Stem Separation** - Split into individual instruments
-- **Vocal Isolation** - Extract or remove vocals
-- **Style Transfer** - Change genre or style
-- **Upscaling** - Improve audio quality
-- **Tempo/Pitch** - Change speed or key
-- **Extend** - Generate continuation of audio
+- **Stem Separation** — Split into individual instruments
+- **Vocal Isolation** — Extract or remove vocals
+- **Style Transfer** — Change genre or style
+- **Upscaling** — Improve audio quality
+- **Tempo/Pitch** — Change speed or key
+- **Extend** — Generate continuation of audio
 
 ---
 
@@ -714,11 +674,11 @@ Common AI transformations include:
 
 ### Speed Tips
 
-1. **Use single-key mode switches** - `S`, `T`, `X`, `C`, `V`, `D`, `P` are faster than the dropdown
-2. **Ctrl+D for quick duplication** - Faster than copy/paste for repeating clips
-3. **Z key for zoom control** - Quickly zoom to selection or fit all
-4. **Tab/Shift+Tab** - Navigate between clips without clicking
-5. **Alt to bypass snap** - Fine-tune positioning while snap is enabled
+1. **Use single-key mode switches** — `S`, `T`, `X`, `C`, `V`, `D`, `P` are faster than the dropdown
+2. **Ctrl+D for quick duplication** — Faster than copy/paste for repeating clips
+3. **Z key for zoom control** — Quickly zoom to selection or fit all
+4. **Tab/Shift+Tab** — Navigate between clips without clicking
+5. **Alt to bypass snap** — Fine-tune positioning while snap is enabled
 
 ### Common Workflows
 
@@ -761,12 +721,10 @@ Common AI transformations include:
 
 ### Modifier Key Summary
 
-| Modifier | Effect |
-|----------|--------|
-| **Ctrl/Cmd** | Multi-select, zoom, quick operations |
-| **Shift** | Range select, track operations, extend behavior |
-| **Alt** | Bypass snap-to-grid, grid resolution scroll |
-| **Right-click** | Context menu, special mode actions |
+- **Ctrl/Cmd** — Multi-select, zoom, quick operations
+- **Shift** — Range select, track operations, extend behavior
+- **Alt** — Bypass snap-to-grid, grid resolution scroll
+- **Right-click** — Context menu, special mode actions
 
 ---
 
@@ -774,17 +732,15 @@ Common AI transformations include:
 
 The cursor changes to show what action will occur:
 
-| Cursor | Meaning |
-|--------|---------|
-| Default arrow | Select mode |
-| col-resize (↔) | Split mode or edge resize |
-| ns-resize (↕) | Volume adjustment |
-| ew-resize (↔) | Stretch mode |
-| copy | Clone mode |
-| not-allowed | Delete mode |
-| crosshair | Selection box |
-| cell | Toggle selection box |
-| zoom-in | Zoom selection box |
+- **Default arrow** — Select mode
+- **col-resize (↔)** — Split mode or edge resize
+- **ns-resize (↕)** — Volume adjustment
+- **ew-resize (↔)** — Stretch mode
+- **copy** — Clone mode
+- **not-allowed** — Delete mode
+- **crosshair** — Selection box
+- **cell** — Toggle selection box
+- **zoom-in** — Zoom selection box
 
 ---
 
