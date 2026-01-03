@@ -337,51 +337,257 @@ Draw new MIDI notes.
 
 Right-click on clips or tracks to access context menus with additional options.
 
-### Clip Context Menu
+### Audio Clip Context Menu
 
-Right-click on any clip to see options:
+Right-click on an audio clip to see these options:
 
-**For Audio Clips:**
-- **Transform** — Apply AI transformations (stem separation, style transfer, etc.)
-- **Replace Source** — Swap the audio file with a different one
-- **Download** — Export the clip as an audio file
+#### Transform (AI Audio Processing)
+
+Opens a submenu with AI-powered audio transformation tools. Available tools are loaded dynamically based on your audio and include:
+
+**Music Tools:**
+- **Describe new style** — Reimagine your audio with a text prompt
+  - Solo Reskin — Change the style or instrument of a stem
+  - Reimagine Melody — Transform a melody with a description
+  - Transform humming — Convert voice/humming into a melody
+  - Reimagine Song with Vocals — Remix with just a description
+- **Split Stems** — Separate audio into individual instrument tracks (drums, bass, vocals, etc.)
+- **Extend** — Generate continuation of your audio
+  - Instrumental — Extend instrumental music
+  - Song — Extend music with vocals
+  - Speech — Extend spoken audio
+
+**Vocal Tools:**
+- **Cleanup Vocals** — Remove noise and enhance clarity
+- **Remove reverb** — Strip reverb from audio
+- **Extract Vocals** — Isolate vocals from background music
+- **Change Voice** — Transform to a different voice (Male/Female/Custom voices available)
+- **Transform humming** — Convert humming to melody
+- **Extend Speech** — Continue speech with a script
+- **Unmix Multiple Vocals** — Separate multiple voices in a recording
+
+**Other Tools:**
+- **Upscale** — Improve audio quality (available for clips between 1-180 seconds that haven't been upscaled)
+- **Ask AI / Attach audio** — Send to Coproducer for AI assistance
+- **Recreate AI source** — Re-run generation with different parameters (only appears if clip was AI-generated)
+
+#### Rename
+
+Opens a dialog to rename the audio clip.
+
+#### Pitch Shift
+
+Opens a window with a slider to adjust the clip's pitch from -12 to +12 semitones. Changes preview in real-time as you drag. Includes a reset button to restore original pitch.
+
+#### Convert to MIDI
+
+Submenu with options to convert audio to MIDI format:
+
+- **Use as instrument sample** — Creates a MIDI clip with a single note that triggers this audio. The audio becomes the "instrument" that plays when MIDI notes are triggered. Useful for creating melodic patterns from a single sound (drum hit, synth stab, vocal chop, etc.).
+
+- **Detect melody notes** — Uses AI to analyze the audio and transcribe detected melody into MIDI notes. The resulting MIDI clip plays back using a piano sound. Useful for extracting melodic content from recordings.
+
+**Multi-clip selection:** When you select multiple audio clips that share the same source, "Convert to MIDI" merges them into a single MIDI pattern. Each clip becomes a note, with position and pitch preserved. Useful for converting chopped-up samples back into a playable pattern.
+
+#### Sync Tempo
+
+*Only appears if the source audio has tempo information and the clip isn't already synced.*
+
+Automatically adjusts playback speed to match the project tempo based on the source audio's original BPM.
+
+#### Reset Speed
+
+*Only appears if clip speed has been modified (not 1x).*
+
+Resets playback speed to normal (1x).
+
+#### Reset Width
+
+*Only appears if the clip has been trimmed.*
+
+Removes any trim/cut bounds, restoring the clip to show the full source audio duration.
+
+#### Fade
+
+Apply volume fades to the clip:
+
+- **Click "Fade"** — Applies 10% fade to both ends
+- **Fade In** — Preset options: 5%, 10%, 25%, 50% of clip duration
+- **Fade Out** — Preset options: 5%, 10%, 25%, 50% of clip duration
+- **Reset Fades** — Remove all fades (only appears if fades exist)
+
+Fades are constrained so fade in + fade out cannot exceed clip duration.
+
+#### Render
+
+- **Burn to Track** — Renders the clip to a new audio file, replacing it on the track. Useful for committing effects or consolidating.
+- **Download** — Exports the clip as an audio file.
+
+#### Source Audio
+
+Manage the clip's underlying audio source:
+
+- **Change Audio** — Opens import dialog to replace the source with a different audio file
+- **View Audio Info** — Opens the source audio's page (if it's from TwoShot library)
+- **Preview** — Plays a short preview of the source audio
+- **Download** — Downloads the original source audio file
+- **Recreate AI source** — Re-generate with different parameters (only for AI-generated sources)
+
+#### Standard Operations
+
+- **Copy** (`Ctrl+C`) — Copy clip to clipboard
+- **Duplicate** (`Ctrl+D`) — Create a copy at the same position
+- **Delete Clip** (`Del`) — Remove the clip
+
+---
+
+### MIDI Clip Context Menu
+
+Right-click on a MIDI clip to see these options:
+
+#### Merge MIDI Clips
+
+*Only appears when multiple MIDI clips with the same source are selected.*
+
+Combines all selected MIDI clips into a single clip, preserving all note positions and timing.
+
+#### Convert to Audio clips
+
+Explodes the MIDI clip into individual audio clips — one for each note. Each resulting audio clip:
+- Is positioned at the note's start time
+- Has pitch offset matching the note's pitch
+- Has volume matching the note's velocity
+- Has duration matching the note's length
+
+Useful for further processing individual notes or creating variations.
+
+#### Export MIDI File
+
+Downloads the clip's notes as a standard `.mid` MIDI file for use in other DAWs.
+
+#### Reset Width
+
+*Only appears if the clip has been trimmed or has a custom length.*
+
+Removes trim bounds and custom length, restoring the clip to its natural size based on note content.
+
+#### Fade
+
+Same as Audio Clips — apply fade in/out with presets.
+
+#### Render
+
+- **Burn to Track** — Renders MIDI to audio
+- **Download** — Exports as audio file
+
+#### Source Audio
+
+Manage the instrument sample used for playback:
+
+- **Change Audio** — Replace the instrument sample. Includes "Design custom instrument" option to generate a one-shot sample using AI.
+- **View Audio Info** — Opens the source sample's page
+- **Preview** — Plays a short preview of the instrument sample
+- **Download** — Downloads the instrument sample file
+
+#### Standard Operations
+
+- **Copy** (`Ctrl+C`) — Copy clip to clipboard
 - **Duplicate** (`Ctrl+D`) — Create a copy
-- **Split** — Divide the clip at a specific point
-- **Delete** — Remove the clip
+- **Delete Clip** (`Del`) — Remove the clip
 
-**For MIDI Clips:**
-- **Open Editor** — Open the piano roll editor
-- **Quantize** — Snap notes to grid
-- **Duplicate** (`Ctrl+D`) — Create a copy
-- **Delete** — Remove the clip
+---
 
-**For Group Clips:**
-- **Open Editor** — Edit the nested timeline
-- **Ungroup** (`Ctrl+Shift+G`) — Extract contents to parent timeline
+### Group Clip Context Menu
+
+Right-click on a group clip to see these options:
+
+#### Reset Width
+
+*Only appears if the group has been trimmed or has a custom length.*
+
+Removes trim bounds, showing the full group content.
+
+#### Ungroup clips
+
+**Shortcut:** `Ctrl+Shift+G`
+
+Extracts all clips from the group back to the parent timeline. The group container is removed and its contents become individual clips.
+
+#### Ungroup clips with ghosts
+
+*Only appears if tracks inside the group have looping enabled with ghost clips.*
+
+Same as Ungroup, but also converts any ghost/looped clips into real clips before extracting.
+
+#### Fade
+
+Same as other clip types.
+
+#### Render
+
+- **Burn to Track** — Renders entire group to a single audio clip
+- **Download** — Exports as audio file
+
+#### Standard Operations
+
+- **Copy** (`Ctrl+C`) — Copy clip to clipboard
 - **Duplicate** (`Ctrl+D`) — Create a copy
-- **Delete** — Remove the clip
+- **Delete Clip** (`Del`) — Remove the clip
+
+---
 
 ### Track Context Menu
 
 Right-click on a track header to see options:
 
-**Edit Options:**
-- **Select All** — Select all clips in this track
-- **Transform** — Apply AI transformations to entire track (burns first)
-- **Rename Track** — Change the track name
-- **Duplicate Track** (`Shift+D`) — Create a copy of the track
-- **Order** — Move track up/down, insert tracks above/below
-- **Delete Track** (`Shift+Del`) — Remove the track and its clips
+#### Select All
 
-**Render Options:**
-- **Burn Track** — Convert all clips to a single rendered audio clip
-- **Download Audio** — Export the track as a WAV file (Pro feature)
-- **Share as Sample** — Publish the track as a sample on TwoShot
+*Only appears if track has multiple clips.*
 
-**Looping Options** (when looping is enabled):
+Selects all clips in this track. **Shortcut:** `Ctrl+Shift+A` (when track is selected)
+
+#### Transform
+
+Opens the same AI transformation menu as clips. If the track has multiple clips, you'll be prompted to burn the track first (combines all clips into one audio file for processing).
+
+#### Rename Track
+
+Opens a dialog to change the track name.
+
+#### Duplicate Track
+
+**Shortcut:** `Shift+D`
+
+Creates a copy of the track with all its clips.
+
+#### Order (submenu)
+
+- **Move Track Up** (`Shift+Up`) — Move track up one position
+- **Move Track Down** (`Shift+Down`) — Move track down one position
+- **Insert Track Above** — Add empty track above
+- **Insert Track Below** (`Shift++`) — Add empty track below
+
+#### Delete Track
+
+**Shortcut:** `Shift+Del`
+
+Removes the track and all its clips.
+
+#### Render (submenu)
+
+- **Burn Track** — Converts all clips to a single rendered audio clip. Original clips are preserved in a muted group.
+- **Download Audio** — Export track as WAV file (Pro feature)
+- **Share as Sample** — Publish track to TwoShot as a sample (copies link to clipboard)
+
+#### Looping (submenu)
+
+*Only appears when looping is enabled on the track.*
+
 - **Disable Looping** — Turn off track looping
-- **Change Loop Interval** — Set the loop length in beats
-- **Burn Ghost Clips** — Convert ghost clips to real clips
+- **Change Loop Interval** — Set loop length in beats
+- **Burn Ghost Clips** — Convert ghost/looped clips to real clips
+
+---
 
 ### Project Menu
 
@@ -753,4 +959,4 @@ If you can't find what you're looking for or need assistance:
 
 ---
 
-*Last updated: December 2024*
+*Last updated: January 2025*
