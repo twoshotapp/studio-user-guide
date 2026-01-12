@@ -36,7 +36,8 @@ Welcome to the TwoShot Studio! This comprehensive guide covers all keyboard shor
 - `Ctrl+C` / `Cmd+C` — Copy
 - `Ctrl+V` / `Cmd+V` — Paste
 - `Ctrl+A` / `Cmd+A` — Select All
-- `Z` — Zoom to Fit (no selection) or Zoom to Selection
+- `Z` — Zoom mode (click clips to zoom to bounds)
+- `G` — Goto/zoom to selection (or fit all)
 - `Ctrl+0` / `Cmd+0` — Zoom to Fit
 
 ### Mouse Mode Quick Keys
@@ -48,6 +49,7 @@ Welcome to the TwoShot Studio! This comprehensive guide covers all keyboard shor
 - `V` — **Volume**: Adjust clip volume
 - `D` — **Delete**: Click to delete
 - `P` — **Paint**: Draw MIDI notes (MIDI editor only)
+- `Z` — **Zoom**: Click to zoom to bounds, drag to zoom to area
 
 ---
 
@@ -140,7 +142,7 @@ Group clips are containers that hold multiple tracks with clips inside them.
 
 ## Mouse Modes
 
-The Studio has 7 mouse modes that change how your cursor interacts with clips. Switch modes using the dropdown in the header or press the corresponding key.
+The Studio has 8 mouse modes that change how your cursor interacts with clips. Switch modes using the dropdown in the header or press the corresponding key.
 
 ### Select Mode (`S`)
 
@@ -211,6 +213,22 @@ Draw new MIDI notes.
 - **Y position** — Determines note pitch
 - **Snap-to-grid** — Applied automatically
 
+### Zoom Mode (`Z`)
+
+Quickly zoom to specific clips or regions.
+
+**Capabilities:**
+- **Click on clip/note** — Zoom to that item's bounds
+- **Click + Drag** — Draw rectangle to zoom to that region
+- **Click on empty space** — Reset zoom to show all content
+- **Right-click (anywhere)** — Reset zoom to show all content
+- **ESC** — Exit zoom mode and return to Select mode
+
+**Also available in any mode:**
+- **Ctrl + Right-click + Drag** — Draw zoom rectangle
+- **Ctrl + Right-click on clip/note** — Zoom to that item's bounds
+- **Ctrl + Right-click on empty space** — Reset zoom
+
 ---
 
 ## Keyboard Shortcuts
@@ -253,7 +271,8 @@ Draw new MIDI notes.
 - `Ctrl++` / `Cmd++` — Zoom in
 - `Ctrl+-` / `Cmd+-` — Zoom out
 - `Ctrl+0` / `Cmd+0` — Zoom to all
-- `Z` — Zoom to selection (or all)
+- `Z` — Zoom mode (click clips to zoom to bounds)
+- `G` — Goto/zoom to selection (or all if nothing selected)
 - `Ctrl+Scroll` / `Cmd+Scroll` — Zoom at cursor
 - `Alt+Scroll` — Change grid resolution
 
@@ -323,6 +342,13 @@ Draw new MIDI notes.
 - **Ctrl + Right-click + Drag** — Create zoom region
 - **Release** — Zoom to that region
 - **Ctrl + Right-click (no drag)** — Reset zoom to all
+- **Ctrl + Right-click on clip/note** — Zoom to item bounds
+
+**Or use Zoom Mode (`Z`):**
+- **Left-click + Drag** — Create zoom region (no Ctrl needed)
+- **Left-click on clip/note** — Zoom to item bounds
+- **Left-click on empty space** — Reset zoom
+- **Right-click** — Reset zoom
 
 ### Scroll Wheel
 
@@ -710,7 +736,8 @@ Available grid presets (click the grid pill to select):
 
 - **Zoom buttons** — Zoom in/out from center
 - `Ctrl/Cmd + Scroll` — Zoom at cursor position
-- `Z` key — Zoom to selection (or fit all if nothing selected)
+- `Z` key — Enter Zoom mode (click clips to zoom to bounds, drag to zoom to area)
+- `G` key — Goto/zoom to selection (or fit all if nothing selected)
 - `Ctrl+0` / `Cmd+0` — Zoom to fit all content
 - **Ctrl + Right-drag** — Box zoom to region
 
@@ -880,11 +907,12 @@ Common AI transformations include:
 
 ### Speed Tips
 
-1. **Use single-key mode switches** — `S`, `T`, `X`, `C`, `V`, `D`, `P` are faster than the dropdown
+1. **Use single-key mode switches** — `S`, `T`, `X`, `C`, `V`, `D`, `P`, `Z` are faster than the dropdown
 2. **Ctrl+D for quick duplication** — Faster than copy/paste for repeating clips
-3. **Z key for zoom control** — Quickly zoom to selection or fit all
-4. **Tab/Shift+Tab** — Navigate between clips without clicking
-5. **Alt to bypass snap** — Fine-tune positioning while snap is enabled
+3. **Z key for zoom mode** — Click clips to zoom in, right-click to zoom out
+4. **G key for quick navigation** — Quickly jump to your selection
+5. **Tab/Shift+Tab** — Navigate between clips without clicking
+6. **Alt to bypass snap** — Fine-tune positioning while snap is enabled
 
 ### Common Workflows
 
