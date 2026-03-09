@@ -7,19 +7,24 @@ Welcome to the TwoShot Studio! This comprehensive guide covers all keyboard shor
 ## Table of Contents
 
 1. [Quick Reference](#quick-reference)
-2. [Clip Types](#clip-types)
-3. [Mouse Modes](#mouse-modes)
-4. [Keyboard Shortcuts](#keyboard-shortcuts)
-5. [Mouse Interactions](#mouse-interactions)
-6. [Context Menus](#context-menus)
-7. [Timeline Controls](#timeline-controls)
-8. [MIDI Editor](#midi-editor)
-9. [Grid and Zoom](#grid-and-zoom)
-10. [Track Management](#track-management)
-11. [Clip Operations](#clip-operations)
-12. [Rendering and Export](#rendering-and-export)
-13. [AI Transform Features](#ai-transform-features)
-14. [Tips and Workflows](#tips-and-workflows)
+2. [Studio Layout](#studio-layout)
+3. [Clip Types](#clip-types)
+4. [Mouse Modes](#mouse-modes)
+5. [Keyboard Shortcuts](#keyboard-shortcuts)
+6. [Mouse Interactions](#mouse-interactions)
+7. [Context Menus](#context-menus)
+8. [Timeline Controls](#timeline-controls)
+9. [Preview Panel](#preview-panel)
+10. [MIDI Editor](#midi-editor)
+11. [Grid and Zoom](#grid-and-zoom)
+12. [Track Management](#track-management)
+13. [Clip Operations](#clip-operations)
+14. [Rendering and Export](#rendering-and-export)
+15. [Sharing and Collaboration](#sharing-and-collaboration)
+16. [AI Features](#ai-features)
+17. [Notes](#notes)
+18. [Tips and Workflows](#tips-and-workflows)
+19. [Cursor Indicators](#cursor-indicators)
 
 ---
 
@@ -39,6 +44,8 @@ Welcome to the TwoShot Studio! This comprehensive guide covers all keyboard shor
 - `Z` — Zoom mode (click clips to zoom to bounds)
 - `G` — Goto/zoom to selection (or fit all)
 - `Ctrl+0` / `Cmd+0` — Zoom to Fit
+- `Enter` — Open clip editor (MIDI or Group)
+- `Tab` — Select next clip/note, or cycle visible clips in Preview Panel
 
 ### Mouse Mode Quick Keys
 
@@ -48,14 +55,26 @@ Welcome to the TwoShot Studio! This comprehensive guide covers all keyboard shor
 - `C` — **Clone**: Duplicate while dragging
 - `V` — **Volume**: Adjust clip volume
 - `D` — **Delete**: Click to delete
-- `P` — **Paint**: Draw MIDI notes (MIDI editor only)
+- `P` — **Paint**: Draw MIDI notes (MIDI editor) or AI-generate audio (timeline)
 - `Z` — **Zoom**: Click to zoom to bounds, drag to zoom to area
+
+---
+
+## Studio Layout
+
+The Studio interface has these main areas:
+
+- **Header** — Play/pause, project title, undo/redo, mouse mode, tempo, grid controls, zoom, export, share
+- **Timeline** — Horizontal tracks with clips, ruler at top, track headers on the left
+- **Preview Panel** — Visual canvas showing video/image clips at the current playhead position (appears when the project contains visual clips)
+- **Content Panel** — Contextual area below the timeline showing the MIDI editor, group clip editor, or notes sidebar depending on context
+- **Footer** — Status information
 
 ---
 
 ## Clip Types
 
-The Studio supports three types of clips, each with different capabilities:
+The Studio supports five types of clips, each with different capabilities:
 
 ### Audio Clips
 
@@ -64,9 +83,10 @@ Audio clips contain a single audio file or sample.
 **Characteristics:**
 - Displays waveform visualization
 - Can be trimmed, stretched, and repositioned
-- Supports playback speed adjustment
+- Supports playback speed adjustment (percentage or tempo-sync)
 - Can be transformed using AI models
 - Shows source sample name and duration
+- Supports fade in/out
 
 **Visual Indicators:**
 - Waveform display
@@ -90,6 +110,7 @@ MIDI clips contain musical note data that can be edited in the piano roll.
 - Notes visualized as colored blocks
 - Velocity shown as note opacity
 - Can be converted to audio via "Burn to Audio"
+- Supports attack and release envelope controls
 
 **Visual Indicators:**
 - Piano roll note blocks
@@ -107,6 +128,50 @@ MIDI clips contain musical note data that can be edited in the piano roll.
 3. Use Select mode (`S`) to move/edit notes
 4. Use Volume mode (`V`) to adjust velocity
 
+### Video Clips
+
+Video clips display video content on the Preview Panel canvas, with optional audio.
+
+**Characteristics:**
+- Filmstrip visualization on timeline (top 65%) with audio waveform below (bottom 35%)
+- Video rendered on the Preview Panel at the current playhead position
+- Supports viewport (pan/zoom/scale), crop, and opacity
+- Playback speed control and loop option
+- Trim with cutStart/cutEnd
+- Audio can be extracted to a separate audio track
+
+**Visual Indicators:**
+- Filmstrip thumbnails
+- Waveform for audio track (if present)
+- `videocam` icon
+
+**Context Menu Options:**
+- Extract Audio — Extracts video's audio to a new audio clip on the next track
+- Restore Audio — Undoes audio extraction
+- Fit to Canvas — Reset viewport to center at 100% scale
+- Fill Canvas — Auto-scale to cover entire canvas
+- Opacity — Quick presets (100%, 75%, 50%, 25%) + custom slider
+- Reset Width — Clear trim/cut operations
+- Reset Speed — Reset playback speed to 1.0x
+
+### Image Clips
+
+Image clips display a static image on the Preview Panel for a set duration.
+
+**Characteristics:**
+- Static image shown for a defined length (default 4 seconds)
+- Supports viewport (pan/zoom/scale), crop, and opacity
+- No audio component
+
+**Visual Indicators:**
+- Image thumbnail on timeline
+- `image` icon
+
+**Context Menu Options:**
+- Fit to Canvas — Reset viewport to center at 100% scale
+- Fill Canvas — Auto-scale to cover entire canvas
+- Opacity — Quick presets (100%, 75%, 50%, 25%) + custom slider
+
 ### Group Clips
 
 Group clips are containers that hold multiple tracks with clips inside them.
@@ -114,7 +179,7 @@ Group clips are containers that hold multiple tracks with clips inside them.
 **Characteristics:**
 - Contains nested tracks and clips
 - Acts as a single unit on the parent timeline
-- Can contain any combination of audio, MIDI, and other group clips
+- Can contain any combination of audio, MIDI, video, image, and other group clips
 - Useful for organizing complex arrangements
 - Can be ungrouped to extract contents
 
@@ -203,15 +268,19 @@ Quick deletion without selecting first.
 - **Drag** — Delete all clips/notes under cursor path
 - **Right-click** — Also deletes (same as left-click)
 
-### Paint Mode (`P`) - MIDI Editor Only
+### Paint Mode (`P`)
 
-Draw new MIDI notes.
+Dual-purpose drawing mode depending on context:
 
-**Capabilities:**
+**In the MIDI Editor:**
 - **Click** — Create note at cursor position
 - **Click + Drag** — Draw note with custom duration
 - **Y position** — Determines note pitch
 - **Snap-to-grid** — Applied automatically
+
+**On the Timeline:**
+- Opens AI Paint mode — generates audio content by drawing a region on the timeline
+- Click and drag to define the region for generation
 
 ### Zoom Mode (`Z`)
 
@@ -250,7 +319,7 @@ Quickly zoom to specific clips or regions.
 - `Ctrl+Shift+A` / `Cmd+Shift+A` — Select all in selected tracks
 - `Ctrl+I` / `Cmd+I` — Invert selection
 - `Escape` — Clear selection
-- `Tab` — Select next clip/note
+- `Tab` — Select next clip/note (or cycle visible clips in Preview Panel)
 - `Shift+Tab` — Select previous clip/note
 
 ### Clip Operations
@@ -467,6 +536,79 @@ Manage the clip's underlying audio source:
 
 ---
 
+### Video Clip Context Menu
+
+Right-click on a video clip to see these options:
+
+#### Extract Audio
+
+Extracts the video's audio track to a new audio clip on the next track. The video clip remains, and the extracted audio can be edited independently. Useful for processing video audio separately (e.g., removing background noise, adding effects).
+
+#### Restore Audio
+
+*Only appears after audio has been extracted.*
+
+Undoes audio extraction, restoring the original video audio.
+
+#### Fit to Canvas
+
+Resets the clip's viewport to center position at 100% scale (default: x=0.5, y=0.5, scale=1).
+
+#### Fill Canvas
+
+Auto-scales the video to cover the entire canvas, handling letterbox/pillarbox based on aspect ratio differences.
+
+#### Opacity
+
+Quick presets: 100%, 75%, 50%, 25%. Also includes a custom option with a 0-100% slider that applies instantly.
+
+#### Reset Width
+
+*Only appears if cutStart or cutEnd are set.*
+
+Removes any trim/cut bounds.
+
+#### Reset Speed
+
+*Only appears if speed is modified.*
+
+Resets playback speed to 1.0x.
+
+#### Standard Operations
+
+- **Rename** — Rename the clip
+- **Fade** — Same as audio clips
+- **Copy** (`Ctrl+C`) — Copy clip to clipboard
+- **Duplicate** (`Ctrl+D`) — Create a copy
+- **Delete Clip** (`Del`) — Remove the clip
+
+---
+
+### Image Clip Context Menu
+
+Right-click on an image clip to see these options:
+
+#### Fit to Canvas
+
+Resets the clip's viewport to center position at 100% scale.
+
+#### Fill Canvas
+
+Auto-scales the image to cover the entire canvas.
+
+#### Opacity
+
+Quick presets: 100%, 75%, 50%, 25%. Custom slider available.
+
+#### Standard Operations
+
+- **Rename** — Rename the clip
+- **Copy** (`Ctrl+C`) — Copy clip to clipboard
+- **Duplicate** (`Ctrl+D`) — Create a copy
+- **Delete Clip** (`Del`) — Remove the clip
+
+---
+
 ### MIDI Clip Context Menu
 
 Right-click on a MIDI clip to see these options:
@@ -639,14 +781,45 @@ Click the project title dropdown to access:
 
 The timeline header contains these controls (left to right):
 
-1. **Play/Pause Button** — Start or stop playback
+1. **Play/Pause Button** — Start or stop playback. Shows a "SOLO" badge (yellow) when solo mode is active — click the badge to disable solo.
 2. **Project Title** — Click to rename, dropdown for project options
 3. **Undo/Redo** — History navigation
-4. **Mouse Mode Dropdown** — Switch between modes
-5. **Tempo Control** — Adjust project BPM
-6. **Metronome Toggle** — Enable/disable click track
-7. **Grid Controls** — Magnet (snap) + grid size dropdown
+4. **Mouse Mode Dropdown** — Switch between modes (S, P, T, X, C, V, D, Z)
+5. **Tempo Control** — Adjust project BPM. Click the X button to unset BPM (enter non-music mode). Only visible in music mode.
+6. **Metronome Toggle** — Enable/disable click track (red when active). Music mode only.
+7. **Grid Controls** — Magnet (snap toggle, red when active) + grid size dropdown + grid mode button (Off / Seconds / Beats)
 8. **Zoom Controls** — Zoom in/out/fit buttons
+
+**Selection Pill** (appears when 2+ clips are selected):
+- Clip count display
+- Mute toggle (`M`)
+- Copy (`Ctrl+C`)
+- Burn to audio (`Ctrl+B`)
+- Group (`Ctrl+G`)
+- Delete (`Del`)
+- More menu: Duplicate, Auto Extend, Select All, Invert Selection, Clear Selection, Ungroup
+
+**Right Section:**
+- **Export Menu** — Render project to audio/video
+- **Share Button** — Share/publish options
+
+### Music Mode vs Non-Music Mode
+
+**Music Mode** (tempo is set):
+- Tempo control and metronome visible in header
+- Timeline ruler shows bars and beats
+- Grid options are beat-based (1/64 beat to 8 bars)
+- Clip positions stored as beats
+- Ideal for music production
+
+**Non-Music Mode** (tempo is null/unset):
+- No tempo control or metronome in header
+- Timeline ruler shows time (seconds/minutes)
+- Grid options are time-based (100ms, 250ms, 500ms, 1s, 2s, 5s, 15s, 1min)
+- Clip positions stored as seconds
+- Ideal for podcasts, video editing, sound design, ambient/field recording
+
+To switch modes: click the tempo X button to enter non-music mode, or type a BPM value to enter music mode.
 
 ### Playhead
 
@@ -660,6 +833,51 @@ When you solo a clip (`S` with one clip selected):
 - "SOLO" badge appears on play button
 - Only the soloed track plays
 - Click "SOLO" badge to disable
+
+---
+
+## Preview Panel
+
+The Preview Panel is a visual canvas that appears when your project contains video or image clips. It shows the composited visual output at the current playhead position.
+
+### Canvas
+
+The canvas renders all visible video/image clips at the current playhead position, layered by track order and clip type.
+
+**Z-order (back to front):**
+1. Clips on lower tracks (higher index) render behind clips on higher tracks
+2. On the same track: video clips behind image clips
+3. Same track and type: earlier start position renders behind
+
+### Aspect Ratio
+
+Click the aspect ratio button in the Preview Panel header to choose:
+- **Auto** — Derived from source video/image content or defaults to 16:9
+- **16:9** — Standard widescreen (YouTube)
+- **9:16** — Portrait mode (Reels, TikTok, Shorts)
+- **1:1** — Square (Instagram)
+- **4:3** — Classic video
+- **4:5** — Instagram portrait
+- **21:9** — Ultra-wide
+- **Custom...** — Enter a Width:Height ratio with live preview
+
+### Interactions
+
+- **Click on a clip** — Select it (shows dashed white border with corner handles)
+- **Ctrl/Cmd + Click** — Toggle clip in selection (multi-select)
+- **Tab** — Cycle through visible clips at the current playhead position
+- **Drag selected clip** — Pan the clip's viewport position
+- **Drag corner handles** — Zoom/scale the clip (4 handles: top-left, top-right, bottom-left, bottom-right)
+- **Scroll wheel** — Zoom in/out on the selected clip
+- **Right-click** — Opens the same context menu as the clip on the timeline
+
+### Cursor States
+
+- **Default arrow** — Empty canvas
+- **Pointer** — Over an unselected clip
+- **Grab** — Over a selected clip (ready to drag)
+- **Grabbing** — Actively dragging a clip
+- **Resize arrows** — Over corner resize handles
 
 ---
 
@@ -690,6 +908,12 @@ Access the MIDI editor by double-clicking a MIDI clip or pressing `Enter` with o
 - **Drag up/down** to adjust
 - **Right-click** to reset to default (1.0)
 
+### Attack and Release
+
+MIDI clips support envelope controls that shape how each note sounds:
+- **Attack** — Fade-in time at the start of each note
+- **Release** — Fade-out time after each note ends (default: 0.1s)
+
 ---
 
 ## Grid and Zoom
@@ -706,25 +930,24 @@ When snap is enabled:
 - Clip movements snap to grid lines
 - Clip edges snap when trimming
 - MIDI notes snap when adding or moving
+- Clip edges snap to other clip edges for alignment
 
 ### Grid Lines
 
 Grid lines appear on the timeline to help with alignment:
-- **Major lines** — Show bar boundaries
-- **Minor lines** — Show beat subdivisions based on grid size
+- **Major lines** — Show bar boundaries (music mode) or second boundaries (seconds mode)
+- **Minor lines** — Show beat subdivisions or sub-second divisions based on grid size
 - **Grid size** affects both snap behavior and visual lines
 
-### Grid Sizes
+### Grid Modes
 
-Available grid presets (click the grid pill to select):
-- 1/4 beat (16th notes)
-- 1/2 beat (8th notes)
-- 1 beat (quarter notes)
-- 2 beats (half notes)
-- 1 bar (4 beats)
-- 2 bars
-- 4 bars
-- 8 bars
+The grid mode button (settings icon next to the grid pill) controls the grid type:
+
+- **Off** — No visible grid lines
+- **Beats** — Tempo-based grid (for music projects). Available sizes: 1/64, 1/32, 1/16, 1/8, 1/4, 1/2, 1, 2, 4, 8 beats
+- **Seconds** — Time-based grid (for visual and non-music projects). Available sizes: 100ms, 250ms, 500ms, 1s, 2s, 5s, 15s, 1min
+
+The grid mode auto-detects based on project content: switches to beats mode when the project has tempo set or contains MIDI clips.
 
 ### Changing Grid
 
@@ -772,7 +995,7 @@ Each track has:
 Enable looping to repeat a track's content:
 
 1. Right-click track > enable looping
-2. Set loop interval (in beats)
+2. Set loop interval (in beats, or "auto" to auto-detect from clip length)
 3. **Ghost clips** appear showing where content will repeat
 4. **Burn Ghost Clips** to convert ghosts to real clips
 
@@ -790,9 +1013,13 @@ Enable looping to repeat a track's content:
 
 - **Drag audio** from browser onto timeline
 - **Import audio** via URL or file upload
+- **Import video** via URL or file upload
+- **Import image** via URL or file upload
 - **Generate audio** using AI models
-- **Record** using microphone input
+- **Record audio** using microphone input
+- **Record video** using camera input
 - **Paint MIDI** in the MIDI editor
+- **AI Paint** on the timeline (Paint mode `P` on timeline)
 
 ### Editing Clips
 
@@ -853,25 +1080,40 @@ Publish a track to TwoShot's sample library:
 2. Track is rendered and uploaded
 3. Link is copied to clipboard
 
-### Export to DAW
+### Export
 
-Export your project for use in other DAWs:
+Access the export menu from the header to render the full project:
 
 **Supported formats:**
+- Audio (WAV, MP3)
+- Video (when project contains visual clips)
 - FL Studio project (.flp)
 - MIDI file (.mid)
 - Audio stems (WAV files)
 
-**How to export:**
-1. Access export options from project menu
-2. Select your target format
-3. Download the exported file(s)
+---
+
+## Sharing and Collaboration
+
+### Share Link
+
+Click the Share button in the header to generate a shareable link to your project. Recipients can view (and optionally edit) the project depending on the permission level you set.
+
+### Share as Sample/Pack
+
+Right-click a track > Render > Share as Sample to publish individual tracks as samples on TwoShot. The link is automatically copied to your clipboard.
+
+### Visibility
+
+Projects can be set to:
+- **Private** — Only you can access
+- **Public** — Anyone with the link can view
 
 ---
 
-## AI Transform Features
+## AI Features
 
-TwoShot integrates AI models for audio transformation.
+TwoShot integrates AI models for audio transformation and generation.
 
 ### Transforming Clips
 
@@ -891,6 +1133,14 @@ TwoShot integrates AI models for audio transformation.
 3. Select transformation
 4. Result appears as new clip
 
+### AI Paint Mode
+
+Use Paint mode (`P`) on the timeline (not in the MIDI editor) to draw a region and generate audio content with AI. This provides an intuitive way to create audio by painting directly on the timeline.
+
+### Melody Detection
+
+Available through the audio clip context menu: Convert to MIDI > Detect melody notes. Uses AI to transcribe detected melody from audio into MIDI notes.
+
 ### Available Transformations
 
 Common AI transformations include:
@@ -900,6 +1150,24 @@ Common AI transformations include:
 - **Upscaling** — Improve audio quality
 - **Tempo/Pitch** — Change speed or key
 - **Extend** — Generate continuation of audio
+
+---
+
+## Notes
+
+The Notes sidebar provides a rich text editor linked to your studio project.
+
+### Accessing Notes
+
+Open the Notes sidebar from the studio interface. Each project automatically gets a linked note.
+
+### Features
+
+- **Rich text editing** — Full formatting support with sections and headings
+- **Auto-linked to project** — Note is automatically associated with the current studio project
+- **Undo/Redo** — `Ctrl+Z` / `Ctrl+Shift+Z` within the editor
+- **Fullscreen mode** — Expand the note to a full-screen editor for detailed writing
+- **Project link** — Navigate directly from a note back to its linked studio project
 
 ---
 
@@ -913,6 +1181,7 @@ Common AI transformations include:
 4. **G key for quick navigation** — Quickly jump to your selection
 5. **Tab/Shift+Tab** — Navigate between clips without clicking
 6. **Alt to bypass snap** — Fine-tune positioning while snap is enabled
+7. **Tab in Preview Panel** — Cycle through overlapping visual clips at the playhead
 
 ### Common Workflows
 
@@ -953,6 +1222,29 @@ Common AI transformations include:
 3. Set proper track volumes
 4. Use Render > Download Audio for each track
 
+**Adding video to a music project:**
+1. Import video via URL or from your library
+2. Place video clip on a track
+3. Use Preview Panel to adjust viewport (pan/zoom) and crop
+4. Set aspect ratio for your target platform (16:9 for YouTube, 9:16 for Reels)
+5. Extract audio from video if you want to process it separately
+6. Layer image clips for title cards, adjust length to match sections
+
+**Non-music project (podcast, ambience):**
+1. Unset the project tempo (click X on tempo control) to enter non-music mode
+2. Switch grid to seconds mode for time-based positioning
+3. Import audio or video content
+4. Position clips using seconds-based grid
+5. Use null tempo for straightforward time-based editing without BPM math
+
+**Creating a visual slideshow:**
+1. Set project viewport to your target resolution
+2. Import images and place as image clips on a track
+3. Set each image clip's length to match the desired display duration
+4. Use viewport controls in the Preview Panel to pan/zoom each image
+5. Add audio tracks underneath for music or narration
+6. Export as video
+
 ### Modifier Key Summary
 
 - **Ctrl/Cmd** — Multi-select, zoom, quick operations
@@ -967,14 +1259,17 @@ Common AI transformations include:
 The cursor changes to show what action will occur:
 
 - **Default arrow** — Select mode
-- **col-resize (↔)** — Split mode or edge resize
-- **ns-resize (↕)** — Volume adjustment
-- **ew-resize (↔)** — Stretch mode
+- **col-resize** — Split mode or edge resize
+- **ns-resize** — Volume adjustment
+- **ew-resize** — Stretch mode
 - **copy** — Clone mode
 - **not-allowed** — Delete mode
 - **crosshair** — Selection box
 - **cell** — Toggle selection box
 - **zoom-in** — Zoom selection box
+- **pointer** — Over an unselected clip in Preview Panel
+- **grab/grabbing** — Moving a clip in Preview Panel
+- **nwse-resize/nesw-resize** — Over corner resize handles in Preview Panel
 
 ---
 
@@ -987,4 +1282,4 @@ If you can't find what you're looking for or need assistance:
 
 ---
 
-*Last updated: January 2025*
+*Last updated: March 2025*
