@@ -1128,20 +1128,20 @@ The **Snap Matrix** in the header is the single place that controls grid lines, 
 
 Hold `Alt` at any time to **temporarily invert** the current snap state while dragging.
 
-Each row in the matrix panel represents one snap target, with up to four controls per row:
+The panel has one row per snap target, with up to four controls per row:
 
-- **Snap** (magnet icon, red when on) — pulls the dragged clip or playhead toward targets of this type.
+| Target | Snap (magnet) | Grid lines | Cursor label | Value |
+|---|:---:|:---:|:---:|---|
+| **Beats** | ✓ | ✓ | ✓ | Subdivisions from a quarter-beat up through multi-bar |
+| **Seconds** | ✓ | ✓ | ✓ | 100 ms, 250 ms, 500 ms, 1 s, 2 s, 5 s, 15 s, 1 min, … |
+| **Clip edges** | ✓ | — | ✓ | — |
+| **Words** *(when the project has a transcript)* | ✓ | — | ✓ | — |
+| **Sections** *(when the project has a transcript)* | ✓ | — | ✓ | — |
+
+- **Snap** (magnet, red when on) — pulls the dragged clip or playhead toward targets of this type.
 - **Grid lines** (grid icon, blue when on) — draws grid lines on the timeline. Beats and Seconds only.
-- **Cursor label** (selector icon, yellow when on) — shows the nearest target's label — a word, a section name, a beat/second value — next to the playhead as you scrub.
-- **Value** — a dropdown showing available subdivisions. Beats and Seconds only. Scroll the row to step through values.
-
-**Available rows:**
-
-- **Beats** — snap, grid lines, cursor label, value (subdivisions from a quarter-beat up through multi-bar).
-- **Seconds** — snap, grid lines, cursor label, value (100 ms, 250 ms, 500 ms, 1 s, 2 s, 5 s, 15 s, 1 min, …).
-- **Clip edges** — snap, cursor label.
-- **Words** *(only when the project has a transcript)* — snap, cursor label.
-- **Sections** *(only when the project has a transcript)* — snap, cursor label.
+- **Cursor label** (selector icon, yellow when on) — shows the nearest target's label (a word, a section name, a beat/second value) next to the playhead as you scrub.
+- **Value** — dropdown for Beats and Seconds. Scroll the row to step through values.
 
 **Scroll** on the top-level pill steps every row that has grid lines on. **Scroll on a specific row** in the panel steps only that row.
 
