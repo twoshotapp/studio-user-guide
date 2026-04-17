@@ -16,15 +16,16 @@ Welcome to the TwoShot Studio! This comprehensive guide covers all keyboard shor
 8. [Timeline Controls](#timeline-controls)
 9. [Preview Panel](#preview-panel)
 10. [MIDI Editor](#midi-editor)
-11. [Grid and Zoom](#grid-and-zoom)
-12. [Track Management](#track-management)
-13. [Clip Operations](#clip-operations)
-14. [Rendering and Export](#rendering-and-export)
-15. [Sharing and Collaboration](#sharing-and-collaboration)
-16. [AI Features](#ai-features)
-17. [Notes](#notes)
-18. [Tips and Workflows](#tips-and-workflows)
-19. [Cursor Indicators](#cursor-indicators)
+11. [Transcript](#transcript)
+12. [Grid and Zoom](#grid-and-zoom)
+13. [Track Management](#track-management)
+14. [Clip Operations](#clip-operations)
+15. [Rendering and Export](#rendering-and-export)
+16. [Sharing and Collaboration](#sharing-and-collaboration)
+17. [AI Features](#ai-features)
+18. [Notes](#notes)
+19. [Tips and Workflows](#tips-and-workflows)
+20. [Cursor Indicators](#cursor-indicators)
 
 ---
 
@@ -75,6 +76,16 @@ The Studio interface has these main areas:
 - **Content Panel** — Contextual area below the timeline showing the MIDI editor, group clip editor, or notes sidebar depending on context
 - **AI Assistant** — Opens as a right-side sidebar on desktop or a bottom-sheet popup on narrow screens. Triggered by any **Ask AI** button, by `Ctrl+/`, or by an AI notification.
 
+### Main-View Modes
+
+The main area shows the timeline by default but can be switched to full-area **Preview** or **Transcript** via the mode switcher pill at the bottom of the screen. The URL hash reflects the current mode:
+
+- no hash — timeline (default)
+- `#preview` — preview canvas fills the main area
+- `#transcript` — transcript fills the main area (label is **Lyrics** for projects with tempo)
+
+Clicking a mode toggles it; clicking Timeline returns to the default. Right-side sidebars hide while a main mode is active. If both Preview and Transcript are active, transcript takes the main area and preview stays in the right sidebar.
+
 ---
 
 ## Clip Types
@@ -104,11 +115,15 @@ Audio clips contain a single audio file or sample.
 
 **Context Menu Options:**
 - Ask AI (open a session about this clip)
+- Get Transcript — fetches a transcript for the clip's audio (hidden once transcribed)
 - Transform (AI audio transformations)
 - Convert to MIDI, Pitch Shift, Sync Tempo, Reset Speed/Width
 - Fade, Render (Burn / Download / Share as Sound or Video)
+- Unburn — rehydrates a burned clip back into its source tracks (only on clips that were burned from a multi-clip source)
 - Source Audio (Change / View / Preview / Download)
 - Duplicate, Split, Delete
+
+Audio clips that were burned from project data show a small **flame icon** in their header alongside the type icon — click it (or the Open-in-fullscreen button in the clip's action bar) to unburn.
 
 ### MIDI Clips
 
@@ -257,7 +272,7 @@ Dedicated mode for resizing clips.
 **Capabilities:**
 - **Drag left edge** — Trim clip start (adjusts where playback begins)
 - **Drag right edge** — Trim clip end (adjusts where playback ends)
-- **Alt + Drag** — Bypass snap-to-grid for precise positioning
+- **Alt + Drag** — Temporarily invert the current snap state (turns snap off when it's on, and vice versa) for precise positioning
 
 ### Split Mode (`X`)
 
@@ -380,7 +395,7 @@ All `Ctrl` shortcuts also work with `Cmd` on macOS. The shortcuts below work on 
 - `Z` — Zoom mode (click clips to zoom to bounds, drag to zoom to area)
 - `G` — Goto/zoom to selection (or fit all if nothing selected)
 - `Ctrl+Scroll` — Zoom at cursor
-- `Alt+Scroll` — Change grid resolution
+- `Scroll on the Snap Matrix` — Step the grid value (scroll the top-level pill to step every active row, or scroll a specific row)
 
 ### Movement
 
@@ -461,10 +476,10 @@ When **keyboard-to-MIDI** mode is active, the keyboard becomes a piano:
 
 ### Scroll Wheel
 
-- **Scroll** — Pan timeline horizontally
-- **Ctrl/Cmd + Scroll** — Zoom at cursor position
-- **Alt + Scroll** — Change grid resolution
-- **Scroll on grid pill** — Change grid resolution
+- **Scroll** — Pan the timeline horizontally
+- **Ctrl + Scroll** — Zoom at cursor position
+- **Scroll on the Snap Matrix pill** — Step the value of every snap row that has grid lines enabled
+- **Scroll on a Snap Matrix row** — Step only that row's value
 
 ---
 
@@ -588,6 +603,12 @@ Right-click on a video clip to see these options:
 #### Ask AI
 
 Opens an AI session about this video clip (same model as audio clips — independent per-clip session).
+
+#### Get Transcript
+
+*Only on videos with an audio track. Hidden once a transcript is cached.*
+
+Fetches a transcript for the video's audio. The transcript appears in the Transcript panel / main view.
 
 #### Extract Audio
 
@@ -742,6 +763,12 @@ Right-click on a group clip to see these options:
 
 Opens an AI session about this group (the assistant gets the group's contents as context).
 
+#### Get Transcript
+
+*Only on groups that contain audio or video clips. Hidden once all contained audio is transcribed.*
+
+Transcribes every child audio/video clip in the group in parallel.
+
 #### Reset Width
 
 *Only appears if the group has been trimmed or has a custom length.*
@@ -877,7 +904,7 @@ The timeline header contains these controls (left to right):
 4. **Mouse Mode Dropdown** — Switch between modes (S, P, T, X, C, V, D, Z).
 5. **Tempo Pill** — Adjust project BPM by typing, scrolling, or pressing the arrow keys while focused. Hover the pill to reveal an X button that clears the tempo (drops to Non-Music Mode). The pill is only visible in Music Mode. Valid range: **40–500 BPM**.
 6. **Metronome Toggle** — Enable/disable the click track (red when active). Music Mode only.
-7. **Grid Controls** — A magnet icon (global snap-to-grid; red when active), a grid size selector, and a mode button (Off / Seconds / Beats). Hold `Alt` to temporarily invert the snap state while dragging.
+7. **Snap Matrix** — A magnet icon (global snap on/off; red when any snap target is enabled) and a settings icon that opens the Snap Matrix panel. Hold `Alt` to temporarily invert the snap state while dragging. See [Snap Matrix](#snap-matrix) for full details.
 8. **Zoom Controls** — Zoom in/out and zoom-to-fit buttons.
 
 **Selection Pill** (appears when 2+ clips are selected):
@@ -912,7 +939,7 @@ The timeline header contains these controls (left to right):
 **Switching modes:**
 - Hover the tempo pill and click the X to clear the tempo and drop to Non-Music Mode.
 - Type a BPM in the pill, or use **Set Tempo** in the project menu, to enter Music Mode.
-- Switching the grid mode to **Beats** while the project has no tempo also enters Music Mode — the BPM is automatically inferred from your clips' tempo metadata (the longest tagged clip wins; falls back to 120 BPM if no clip has tempo info).
+- Enabling **Beats** in the Snap Matrix on a no-tempo project also enters Music Mode — the BPM is automatically inferred from your clips' tempo metadata (the longest tagged clip wins; falls back to 120 BPM if no clip has tempo info).
 
 A project with no tempo can still contain tempo-synced clips — they just play at their native speed and the timeline stays time-based.
 
@@ -964,7 +991,7 @@ The transport bar is always visible in the embedded preview. In Fullscreen Mode 
 
 ### Fullscreen Mode
 
-Click the fullscreen button to expand the canvas to fill the screen. Click the button again or press `Escape` to exit.
+Click the fullscreen button in the preview to expand the canvas to fill the main area (URL hash becomes `#preview`). Click it again, use the Timeline button in the bottom mode switcher, or remove the hash to exit.
 
 In Fullscreen Mode:
 
@@ -973,6 +1000,14 @@ In Fullscreen Mode:
 - The shared playback shortcuts (Space, Ctrl+Space, Ctrl+Z, Ctrl+S, mode keys) still work.
 - `Tab` / `Shift+Tab` cycle through the clips visible at the playhead.
 - `Delete` removes the selected clips, `Escape` clears the selection.
+
+### Scrubber (Transport Bar)
+
+The scrubber supports more than simple seeking:
+
+- **Hover** over the scrubber to highlight the corresponding **word** in the transcript (when a transcript is available).
+- **Click** to seek. **Click and drag** past a small threshold to select a time range on the playhead — useful for looping a region or previewing a section.
+- **Arrow keys** (left / right) nudge the playhead by one snap step. Focus the scrubber (tab in) or hover it first; the nudge respects your Snap Matrix settings (beats or seconds, whichever is smaller).
 
 ### Aspect Ratio
 
@@ -1046,56 +1081,83 @@ MIDI clips support envelope controls that shape how each note sounds:
 
 ---
 
+## Transcript
+
+The Transcript feature gives you a time-aligned text view of every audio and video clip in your project. The section title is called **Lyrics** for projects with tempo and **Transcript** otherwise.
+
+### Opening the Transcript
+
+- **Right-side sidebar tab** — Use the mode switcher pill at the bottom of the screen. The Transcript button only appears once the project has at least one transcribed clip.
+- **Main-view mode** — Clicking Transcript while the sidebar is open (or in the main-view mode switcher) expands transcript into the main area. The URL hash becomes `#transcript` (or `#lyrics` for music projects).
+- When both Transcript and Preview are active at the same time, Transcript fills the main area and Preview stays in the right sidebar.
+
+### Requesting a Transcript
+
+Audio, video, and group clips all have a **Get Transcript** item in their right-click menu (marked with a captions icon). The item disappears once the clip is already transcribed — transcripts are cached since audio doesn't change.
+
+Group clips transcribe every child audio/video clip in parallel.
+
+You can also enable **Auto-transcribe** in the transcript panel header — new clips you add are transcribed automatically.
+
+### Working with the Transcript
+
+- **Playback highlighting** — As the project plays, the current word turns green.
+- **Click a word** — Jumps the playhead to that word. If the word is off-screen, the timeline scrolls (or zooms out) to frame the region.
+- **Shift+click** — Range-select from the previously clicked word to this one.
+- **Click and drag** — Draw a selection across words; all words in range are highlighted.
+- **Section headers** group the transcript into chunks; clicking a header selects its whole section.
+- **Gap breaks** appear between words that are far apart in time.
+- **Copy** — A copy button in the panel header copies the transcript text to the clipboard.
+
+### Transcript as a Snap Target
+
+When a transcript is available, the Snap Matrix gains **Words** and **Sections** rows. Enable their snap toggles to pull the playhead (or clip edges) to word and section boundaries; enable the cursor toggle to see the nearest word or section label next to the playhead as you scrub.
+
+Hovering the **scrubber** on the preview's transport bar also highlights the corresponding word in the transcript, so you can find a specific moment in long recordings without playing through.
+
+---
+
 ## Grid and Zoom
 
-### Snap to Grid
+### Snap Matrix
 
-The magnet icon in the header controls **global** snap to grid.
+The **Snap Matrix** in the header is the single place that controls grid lines, snap targets, and on-playhead cursor labels. It's a pill with two buttons:
 
-- **Red magnet** — Snap enabled (clips align to grid lines and to other clip edges)
-- **Gray magnet** — Snap disabled (free positioning)
-- **Hold Alt** — Temporarily invert the current snap state while dragging
+- A **magnet icon** — toggles all snap on/off at once. Red when any snap target is enabled, grey when everything is off.
+- A **settings icon** — opens the snap matrix panel.
 
-When snap is enabled the studio looks for the closest target on **both edges** of the dragged clip and picks whichever gives a tighter snap. Snap targets include:
+Hold `Alt` at any time to **temporarily invert** the current snap state while dragging.
 
-- Grid lines
-- Other clips' edges on any track
-- Ghost clip edges from looping
-- The playhead
+Each row in the matrix panel represents one snap target, with up to four controls per row:
 
-Snap also applies when trimming clip edges and when adding or moving MIDI notes.
+- **Snap** (magnet icon, red when on) — pulls the dragged clip or playhead toward targets of this type.
+- **Grid lines** (grid icon, blue when on) — draws grid lines on the timeline. Beats and Seconds only.
+- **Cursor label** (selector icon, yellow when on) — shows the nearest target's label — a word, a section name, a beat/second value — next to the playhead as you scrub.
+- **Value** — a dropdown showing available subdivisions. Beats and Seconds only. Scroll the row to step through values.
+
+**Available rows:**
+
+- **Beats** — snap, grid lines, cursor label, value (subdivisions from a quarter-beat up through multi-bar).
+- **Seconds** — snap, grid lines, cursor label, value (100 ms, 250 ms, 500 ms, 1 s, 2 s, 5 s, 15 s, 1 min, …).
+- **Clip edges** — snap, cursor label.
+- **Words** *(only when the project has a transcript)* — snap, cursor label.
+- **Sections** *(only when the project has a transcript)* — snap, cursor label.
+
+**Scroll** on the top-level pill steps every row that has grid lines on. **Scroll on a specific row** in the panel steps only that row.
+
+Your snap preferences are stored in your browser and shared across projects. A "Reset to defaults" button at the bottom of the panel restores the project-aware default (beats for music projects, seconds otherwise, scaled to project duration).
+
+**Beats row with no tempo**: the row is dimmed but still clickable. Clicking infers a BPM from your clips (falling back to 120) and enables the toggle in one step.
+
+When snap is enabled the studio looks for the closest target on **both edges** of the dragged clip and picks whichever gives a tighter snap. Snap also applies when trimming clip edges and when adding or moving MIDI notes.
 
 ### Magnetic Tracks
 
-Magnetic mode is **per track** and is separate from snap to grid. Toggle it with the **MAGNET / MAGNETIC** indicator on the track header (or via the track context menu's Enable/Disable Magnetic item).
+Magnetic mode is **per track** and is separate from the Snap Matrix. Toggle it with the **MAGNET / MAGNETIC** indicator on the track header (or via the track context menu's Enable/Disable Magnetic item).
 
 - When magnetic is on, clips on that track are auto-snapped together end-to-end with no gaps.
 - Deleting a clip ripples the others to close the gap.
 - Magnetic only kicks in when the track has more than one clip (or has loop ghosts).
-
-### Grid Lines
-
-Grid lines appear on the timeline to help with alignment:
-
-- **Major lines** show bar boundaries (Music Mode) or second boundaries (Seconds mode)
-- **Minor lines** show beat subdivisions or sub-second divisions based on the grid size
-- The grid size affects both snap behavior and the visible lines
-
-### Grid Modes
-
-The grid mode button next to the grid pill picks the grid type:
-
-- **Off** — No visible grid lines; snap still works against clip edges and the playhead
-- **Beats** — Tempo-based grid. Beat divisions from a quarter-beat up through multi-bar values
-- **Seconds** — Time-based grid (e.g. 100 ms, 250 ms, 500 ms, 1 s, 2 s, 5 s, 15 s, 1 min)
-
-Switching to Beats while the project has no tempo automatically infers a BPM from your clips and enters Music Mode.
-
-### Changing Grid
-
-1. **Click the grid pill** — Opens the preset dropdown
-2. **Scroll on the grid pill** — Cycle through sizes
-3. **Alt + Scroll anywhere on the timeline** — Change grid size
 
 ### Zoom Controls
 
@@ -1224,6 +1286,16 @@ Loop ghosts are baked in. The original track is reused (no muted-group wrapping)
 ### Burn Selection
 
 Press `Ctrl + B` to render the selected clips into a single new clip on the first affected track. Empty tracks are pruned automatically. Same audio/video auto-detection as Burn Track.
+
+### Unburn
+
+Burned clips can be rehydrated back into their original source clips and tracks:
+
+- Burned audio and video clips show a **flame icon** in their header (next to the clip type icon) when they can be unburned.
+- An **Open-in-fullscreen** button in the clip's action bar rehydrates the clip AND opens the new group editor in one click — mirroring how Group clips open.
+- The clip's right-click menu has an **Unburn** item for the same action.
+
+Unburning is the inverse of burning: single-clip sources inline-replace the burned clip in place; multi-clip sources create a group at the clip's position and open it for editing.
 
 ### Download / Render Dialogs
 
@@ -1389,6 +1461,7 @@ The variant updates live from the project's content, so adding tempo to a projec
 7. **`Tab` in the Preview Panel** — Cycle through overlapping visual clips at the playhead
 8. **`Ctrl+/` opens the AI Assistant** anywhere in the studio
 9. **Press `P` and drag** to AI-generate a clip directly on the timeline
+10. **Hover the scrubber** to find a moment by word — the transcript highlights as you move
 
 ### Common Workflows
 
@@ -1413,11 +1486,22 @@ The variant updates live from the project's content, so adding tempo to a projec
 2. In the dialog, pick a quality, a resolution preset, or type custom width × height
 3. Hit Render & Download
 
+**Navigating by lyrics / transcript:**
+1. Right-click an audio or video clip and pick **Get Transcript** (or enable Auto-transcribe in the transcript panel)
+2. Open the Transcript via the mode switcher pill (or expand it to the main area)
+3. Click a word to jump the playhead there; Shift+click or drag to select a range
+4. Turn on Words or Sections in the Snap Matrix to make the playhead snap to spoken boundaries
+
+**Recovering the source of a rendered clip:**
+1. Find a burned clip that shows a flame icon in its header
+2. Click the Open-in-fullscreen button in the clip's action bar (or pick Unburn from its menu)
+3. The clip rehydrates into its source tracks — if it came from multiple clips, a group opens for editing
+
 **Arranging a loop:**
 1. Import your loop audio
 2. Use `Ctrl+D` to duplicate
 3. Position copies using arrow keys
-4. Enable snap-to-grid for tight alignment
+4. Enable snap (magnet icon in the header) for tight alignment
 
 **Editing MIDI velocity:**
 1. Open MIDI clip (`Enter` or double-click)
@@ -1476,7 +1560,7 @@ The variant updates live from the project's content, so adding tempo to a projec
 
 - **Ctrl/Cmd** — Multi-select, zoom, quick operations
 - **Shift** — Range select, track operations, extend behavior
-- **Alt** — Bypass snap-to-grid, grid resolution scroll
+- **Alt** — Temporarily invert the current snap state while dragging
 - **Right-click** — Context menu, special mode actions
 
 ---
