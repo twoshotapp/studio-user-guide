@@ -251,7 +251,7 @@ Group clips are containers that hold multiple tracks with clips inside them.
 
 ## Mouse Modes
 
-The Studio has 8 mouse modes that change how your cursor interacts with clips. Switch modes using the dropdown in the header or press the corresponding key. In **Fullscreen Preview**, only Select, Clone, and Delete modes are available — the other modes are disabled while the canvas is full-screen.
+The Studio has 8 mouse modes that change how your cursor interacts with clips. Switch modes using the dropdown in the header or press the corresponding key. In **Fullscreen Preview**, only Select, Clone, and Delete modes are available. In full-screen **Transcript/Lyrics**, Select, Split, Delete, Paint, and Zoom are available.
 
 ### Select Mode (`S`)
 
@@ -311,6 +311,7 @@ Quick deletion without selecting first.
 - **Click** — Delete clip/note
 - **Drag** — Delete all clips/notes under cursor path
 - **Right-click** — Also deletes (same as left-click)
+- **Generating AI Paint clips** — Deletes/cancels the pending generation
 
 ### Paint Mode (`P`)
 
@@ -324,9 +325,10 @@ A drawing mode that does different things depending on where you use it.
 
 **On the Timeline (AI Paint):**
 - **Drag** to draw a region on the timeline. The region becomes an editable AI clip placeholder.
-- An empty pseudo-track appears at the top of the timeline so you can paint a brand-new track without first creating one.
+- An empty pseudo-track appears at the top of the timeline in most modes so you can paint a brand-new track without first creating one.
 - Drop your cursor on any track to drop the placeholder there; drop on the pseudo-track to create a new track.
 - Resize the placeholder by dragging its left/right edges.
+- Click an existing clip in Paint mode to ask AI about that clip; drag across it to paint a region instead.
 - Type a prompt in the floating chatbox attached to the placeholder, then submit. Generation begins and the placeholder shows live progress, an estimated time remaining, and a stop button.
 - Cancel by clicking the stop button (or by deleting the placeholder before you submit).
 - If you reload or close the project mid-generation, the placeholder reappears with live progress when the project reopens.
@@ -395,6 +397,8 @@ All `Ctrl` shortcuts also work with `Cmd` on macOS. The shortcuts below work on 
 - `Z` — Zoom mode (click clips to zoom to bounds, drag to zoom to area)
 - `G` — Goto/zoom to selection (or fit all if nothing selected)
 - `Ctrl+Scroll` — Zoom at cursor
+- `Alt+Scroll` over the timeline — Step enabled Beats/Seconds snap values
+- `Alt` + `+` / `Alt` + `-` — Step enabled Beats/Seconds snap values finer/coarser
 - `Scroll on the Snap Matrix` — Step the grid value (scroll the top-level pill to step every active row, or scroll a specific row)
 
 ### Movement
@@ -478,6 +482,7 @@ When **keyboard-to-MIDI** mode is active, the keyboard becomes a piano:
 
 - **Scroll** — Pan the timeline horizontally
 - **Ctrl + Scroll** — Zoom at cursor position
+- **Alt + Scroll** over the timeline — Step every enabled Beats/Seconds snap value
 - **Scroll on the Snap Matrix pill** — Step the value of every snap row that has grid lines enabled
 - **Scroll on a Snap Matrix row** — Step only that row's value
 
@@ -1000,6 +1005,7 @@ In Fullscreen Mode:
 - The shared playback shortcuts (Space, Ctrl+Space, Ctrl+Z, Ctrl+S, mode keys) still work.
 - `Tab` / `Shift+Tab` cycle through the clips visible at the playhead.
 - `Delete` removes the selected clips, `Escape` clears the selection.
+- In Clone mode, dragging a clip duplicates it on the canvas; hold `Ctrl`/`Cmd` during the drag to move instead.
 
 ### Scrubber (Transport Bar)
 
@@ -1087,7 +1093,7 @@ The Transcript feature gives you a time-aligned text view of every audio and vid
 
 ### Opening the Transcript
 
-- **Right-side sidebar tab** — Use the mode switcher pill at the bottom of the screen. The Transcript button only appears once the project has at least one transcribed clip.
+- **Right-side sidebar tab** — Use the mode switcher pill at the bottom of the screen. The Transcript button appears once the project has transcript content or transcription is underway.
 - **Main-view mode** — Clicking Transcript while the sidebar is open (or in the main-view mode switcher) expands transcript into the main area. The URL hash becomes `#transcript` (or `#lyrics` for music projects).
 - When both Transcript and Preview are active at the same time, Transcript fills the main area and Preview stays in the right sidebar.
 
@@ -1097,7 +1103,9 @@ Audio, video, and group clips all have a **Get Transcript** item in their right-
 
 Group clips transcribe every child audio/video clip in parallel.
 
-You can also enable **Auto-transcribe** in the transcript panel header — new clips you add are transcribed automatically.
+Videos can be transcribed even when Studio still needs to prepare their audio for transcription. If a video's audio has been extracted to a separate clip, the video itself is treated as muted in the transcript.
+
+You can also enable **Auto-transcribe** in the transcript panel header — new clips you add are transcribed automatically. If transcription needs credits or login, Studio prompts you instead of silently failing.
 
 ### Working with the Transcript
 
@@ -1108,10 +1116,26 @@ You can also enable **Auto-transcribe** in the transcript panel header — new c
 - **Section headers** group the transcript into chunks; clicking a header selects its whole section.
 - **Gap breaks** appear between words that are far apart in time.
 - **Copy** — A copy button in the panel header copies the transcript text to the clipboard.
+- **Download** — The download button exports the transcript as plain text, SRT subtitles, WebVTT subtitles, or JSON.
+- **Layout** — The layout button cycles between Mixed (one chronological transcript), Lined (new line when the source clip changes), and Grouped (one paragraph per clip).
+- **Sections toggle** — Show or hide section headers when the transcript includes sections.
+- **Muted words toggle** — Show all words or hide words from muted clips/tracks.
+
+### Transcript Mouse Modes
+
+The full-screen Transcript/Lyrics view has its own mouse-mode switcher:
+
+- **Select** — Click a word or section to seek and frame it on the timeline; drag or Shift+click to select a range.
+- **Split** — Click a word, section, or selected range to split the source clip at spoken boundaries.
+- **Delete** — Click a word, section, or selected range to remove that spoken region and close the gap.
+- **Paint** — Select words or a section to open an AI Paint prompt using that transcript range as context.
+- **Zoom** — Click or drag over words/sections to zoom the timeline to that spoken range.
 
 ### Transcript as a Snap Target
 
-When a transcript is available, the Snap Matrix gains **Words** and **Sections** rows. Enable their snap toggles to pull the playhead (or clip edges) to word and section boundaries; enable the cursor toggle to see the nearest word or section label next to the playhead as you scrub.
+When the project has transcribable audio or video, the Snap Matrix gains **Words** and **Sections** rows. Enable their snap toggles to pull the playhead or clip edges to word and section boundaries; enable the cursor toggle to see the nearest word or section label next to the playhead as you scrub.
+
+Turning on word/section snap or cursor labels can start Auto-transcribe, because Studio needs word timings before it can snap to them. If transcription finishes and no words or sections are found, those rows are disabled.
 
 Hovering the **scrubber** on the preview's transport bar also highlights the corresponding word in the transcript, so you can find a specific moment in long recordings without playing through.
 
@@ -1135,19 +1159,21 @@ The panel has one row per snap target, with up to four controls per row:
 | **Beats** | ✓ | ✓ | ✓ | Subdivisions from a quarter-beat up through multi-bar |
 | **Seconds** | ✓ | ✓ | ✓ | 100 ms, 250 ms, 500 ms, 1 s, 2 s, 5 s, 15 s, 1 min, … |
 | **Clip edges** | ✓ | — | ✓ | — |
-| **Words** *(when the project has a transcript)* | ✓ | — | ✓ | — |
-| **Sections** *(when the project has a transcript)* | ✓ | — | ✓ | — |
+| **Words** *(when the project has transcribable audio/video)* | ✓ | — | ✓ | — |
+| **Sections** *(when the project has transcribable audio/video)* | ✓ | — | ✓ | — |
 
 - **Snap** (magnet, red when on) — pulls the dragged clip or playhead toward targets of this type.
 - **Grid lines** (grid icon, blue when on) — draws grid lines on the timeline. Beats and Seconds only.
-- **Cursor label** (selector icon, yellow when on) — shows the nearest target's label (a word, a section name, a beat/second value) next to the playhead as you scrub.
+- **Cursor label** (selector icon, yellow when on) — shows the nearest target's label (a word, a section name, a clip edge, or a beat/second value) next to the playhead as you scrub.
 - **Value** — dropdown for Beats and Seconds. Scroll the row to step through values.
 
-**Scroll** on the top-level pill steps every row that has grid lines on. **Scroll on a specific row** in the panel steps only that row.
+**Scroll** on the top-level pill steps every row that has grid lines on. **Scroll on a specific row** in the panel steps only that row. **Alt+Scroll** over the timeline, or **Alt** + **+** / **Alt** + **-**, steps every enabled Beats/Seconds target whether it is enabled for snap or grid lines.
 
-Your snap preferences are stored in your browser and shared across projects. A "Reset to defaults" button at the bottom of the panel restores the project-aware default (beats for music projects, seconds otherwise, scaled to project duration).
+Snap toggles are stored in your browser and shared across projects. Beats/Seconds values are project-aware, so each project starts with a useful default scaled to its duration. A "Reset to defaults" button restores the project-aware default (beats for music projects, seconds otherwise).
 
 **Beats row with no tempo**: the row is dimmed but still clickable. Clicking infers a BPM from your clips (falling back to 120) and enables the toggle in one step.
+
+**Words and Sections rows**: these appear when the project has audio or video that can be transcribed. Turning on their snap or cursor labels can start Auto-transcribe so Studio has word timings to snap to.
 
 When snap is enabled the studio looks for the closest target on **both edges** of the dragged clip and picks whichever gives a tighter snap. Snap also applies when trimming clip edges and when adding or moving MIDI notes.
 
@@ -1213,9 +1239,9 @@ Enable looping to repeat a track's content:
 
 When you add a clip with musical content (audio with BPM longer than ~5 s, or MIDI) to an empty track, looping is enabled automatically.
 
-### Pseudo-Track (Paint Mode)
+### Pseudo-Track (AI Paint)
 
-When you switch to Paint mode, an empty pseudo-track appears at the top of the timeline so you can paint a brand-new AI clip without first creating a track manually. It auto-hides as soon as the first real track has content.
+An empty pseudo-track appears at the top of the timeline in every mouse mode except Delete and Zoom. Drag on it to create a brand-new AI Paint region without first creating a track manually. If you start from another mode, Studio switches to Paint after the drag is committed so the prompt and placeholder behave like normal AI Paint.
 
 ### Deleting Tracks
 
@@ -1233,6 +1259,7 @@ When you switch to Paint mode, an empty pseudo-track appears at the top of the t
 - **Import audio** via URL or file upload
 - **Import video** via URL or file upload
 - **Import image** via URL or file upload
+- **Add Content / drag-drop placement** — Video and image items are added as new top tracks so the latest visual appears in front; audio and MIDI items are added toward the bottom.
 - **Generate audio** using AI models
 - **Record audio** using microphone input
 - **Record video** using camera input
@@ -1254,10 +1281,10 @@ When you switch to Paint mode, an empty pseudo-track appears at the top of the t
 - **Ctrl+Shift+G** to ungroup
 - **Double-click group** to edit contents
 
-### Burn to Audio
+### Burn Selection
 
 - Select clips and press `Ctrl+B` / `Cmd+B`
-- Renders selected clips to a single audio file
+- Renders selected clips to a single audio or video clip, depending on whether the selection contains visual content
 - Useful for:
   - Committing MIDI to audio
   - Consolidating multiple clips
@@ -1301,12 +1328,14 @@ Unburning is the inverse of burning: single-clip sources inline-replace the burn
 
 Downloads and renders go through a consistent dialog:
 
-- **Audio downloads** show a name field and a format dropdown.
+- **Audio downloads** show a name field, format dropdown, and quality tier.
 - **Video downloads** also show:
+  - **Download Type** — Video, Sequence (GIF/WebP), or Audio-only extraction.
+  - **Format** — WebM/MP4/MKV/MOV for video, GIF/WebP for sequence, or MP3/FLAC/WAV/OGG for audio.
   - **Quality** — Low / Medium / High. *High requires Pro.*
   - **Resolution presets** — pre-computed from the clip sources, capped at the project's native size. *Above 720 p requires Pro.*
   - **Width × Height** — editable number inputs (linked by aspect ratio; minimum 120 px per side).
-- A **"Don't show this window again"** checkbox remembers your last settings, so subsequent downloads of the same kind go straight through.
+- A **"Don't show this window again"** checkbox remembers your last settings, so subsequent downloads of the same kind go straight through. When this is enabled, the export menu shows a small settings button next to the fast download action so you can reopen the dialog.
 
 ### Share as Sound / Share as Video
 
@@ -1316,6 +1345,11 @@ Available on tracks (and on individual clips) under the Render submenu. Renders 
 
 Click the download icon in the header to export the full project:
 
+- **Download Transcript** *(when transcript words are available)*
+  - **Plain text (.txt)**
+  - **SubRip subtitles (.srt)**
+  - **WebVTT subtitles (.vtt)**
+  - **JSON (full word-level data)**
 - **Render**
   - **Full Session** — Render the entire project as one file. Becomes a video if the project contains visual content, otherwise a `.WAV` audio file.
   - **Track Stems** — Render each non-muted track as a separate file (video for visual tracks, audio for others). Pro feature.
@@ -1395,13 +1429,19 @@ Switch to Paint mode (`P`) and **drag on the timeline** to draw a region. The re
 2. Submit. The placeholder shows live progress and an estimated time remaining.
 3. Cancel with the stop button, or delete the placeholder before submitting.
 
-Paint mode also adds an empty **pseudo-track at the top of the timeline** so you can paint a brand-new track in one move without first creating one manually.
+The empty **pseudo-track at the top of the timeline** lets you paint a brand-new track in one move without first creating one manually. It is available in most timeline modes; dragging it starts AI Paint and then switches the mouse mode to Paint.
+
+In Paint mode, clicking an existing clip opens an Ask AI prompt for that clip, while dragging across the clip creates a paint region.
 
 If you reload or close the project mid-generation, the placeholder reappears with live progress when the project reopens — you don't lose anything.
 
 ### Spatial Regions in the Preview Canvas
 
 In Paint mode you can also **drag on the Preview canvas** to draw a rectangular spatial region. The AI is told to fit its generated content into that area of the visual frame — useful for placing a generated element in a specific part of a shot or composition.
+
+### Transcript Ranges
+
+In the full-screen Transcript/Lyrics view, Paint mode lets you select words or sections and open an AI prompt tied to that spoken range. This is useful for replacing, extending, or illustrating a specific lyric, line, or spoken moment.
 
 ### Notifications
 
@@ -1466,8 +1506,8 @@ The variant updates live from the project's content, so adding tempo to a projec
 ### Common Workflows
 
 **Generating something with AI Paint:**
-1. Press `P` to enter Paint mode
-2. Drag on the timeline to draw a region (or use the pseudo-track at the top to create a brand-new track)
+1. Press `P` to enter Paint mode, or drag on the pseudo-track at the top of the timeline
+2. Drag on the timeline to draw a region
 3. Type a prompt in the floating chatbox and submit
 4. Watch live progress on the placeholder; cancel with the stop button if needed
 
@@ -1483,7 +1523,7 @@ The variant updates live from the project's content, so adding tempo to a projec
 
 **Rendering a video:**
 1. Either burn the visual track (track menu → Render → Burn Track) or use the header **Export → Full Session**
-2. In the dialog, pick a quality, a resolution preset, or type custom width × height
+2. In the dialog, pick a download type/format, quality, resolution preset, or custom width × height
 3. Hit Render & Download
 
 **Navigating by lyrics / transcript:**
@@ -1491,6 +1531,12 @@ The variant updates live from the project's content, so adding tempo to a projec
 2. Open the Transcript via the mode switcher pill (or expand it to the main area)
 3. Click a word to jump the playhead there; Shift+click or drag to select a range
 4. Turn on Words or Sections in the Snap Matrix to make the playhead snap to spoken boundaries
+
+**Editing from the transcript:**
+1. Open Transcript/Lyrics full-screen
+2. Choose Split, Delete, Paint, or Zoom from the mouse-mode switcher
+3. Click a word or section, or drag across a word range
+4. Studio applies the action to the matching timeline region
 
 **Recovering the source of a rendered clip:**
 1. Find a burned clip that shows a flame icon in its header
@@ -1593,4 +1639,4 @@ If you can't find what you're looking for or need assistance:
 
 ---
 
-*Last updated: April 2026*
+*Last updated: April 30, 2026*
